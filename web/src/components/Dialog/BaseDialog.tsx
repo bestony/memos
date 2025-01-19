@@ -1,9 +1,9 @@
 import { CssVarsProvider } from "@mui/joy";
-import classNames from "classnames";
+import clsx from "clsx";
 import { useEffect, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
-import { ANIMATION_DURATION } from "@/helpers/consts";
+import CommonContextProvider from "@/layouts/CommonContextProvider";
 import store from "@/store";
 import { useDialogStore } from "@/store/module";
 import theme from "@/theme";
@@ -12,7 +12,6 @@ import "@/less/base-dialog.less";
 interface DialogConfig {
   dialogName: string;
   className?: string;
-  containerClassName?: string;
   clickSpaceDestroy?: boolean;
 }
 
@@ -21,7 +20,7 @@ interface Props extends DialogConfig, DialogProps {
 }
 
 const BaseDialog: React.FC<Props> = (props: Props) => {
-  const { children, className, containerClassName, clickSpaceDestroy, dialogName, destroy } = props;
+  const { children, className, clickSpaceDestroy, dialogName, destroy } = props;
   const dialogStore = useDialogStore();
   const dialogContainerRef = useRef<HTMLDivElement>(null);
   const dialogIndex = dialogStore.state.dialogStack.findIndex((item) => item === dialogName);
@@ -57,8 +56,8 @@ const BaseDialog: React.FC<Props> = (props: Props) => {
   };
 
   return (
-    <div className={classNames("dialog-wrapper", className)} onMouseDown={handleSpaceClicked}>
-      <div ref={dialogContainerRef} className={classNames("dialog-container", containerClassName)} onMouseDown={(e) => e.stopPropagation()}>
+    <div className={clsx("dialog-wrapper", className)} onMouseDown={handleSpaceClicked}>
+      <div ref={dialogContainerRef} className={clsx("dialog-container")} onMouseDown={(e) => e.stopPropagation()}>
         {children}
       </div>
     </div>
@@ -68,43 +67,34 @@ const BaseDialog: React.FC<Props> = (props: Props) => {
 export function generateDialog<T extends DialogProps>(
   config: DialogConfig,
   DialogComponent: React.FC<T>,
-  props?: Omit<T, "destroy" | "hide">
+  props?: Omit<T, "destroy">,
 ): DialogCallback {
   const tempDiv = document.createElement("div");
   const dialog = createRoot(tempDiv);
   document.body.append(tempDiv);
-
-  setTimeout(() => {
-    tempDiv.firstElementChild?.classList.add("showup");
-  }, 0);
+  document.body.style.overflow = "hidden";
 
   const cbs: DialogCallback = {
     destroy: () => {
-      tempDiv.firstElementChild?.classList.remove("showup");
-      tempDiv.firstElementChild?.classList.add("showoff");
-      setTimeout(() => {
-        dialog.unmount();
-        tempDiv.remove();
-      }, ANIMATION_DURATION);
-    },
-    hide: () => {
-      tempDiv.firstElementChild?.classList.remove("showup");
-      tempDiv.firstElementChild?.classList.add("showoff");
+      document.body.style.removeProperty("overflow");
+      dialog.unmount();
+      tempDiv.remove();
     },
   };
 
   const dialogProps = {
     ...props,
     destroy: cbs.destroy,
-    hide: cbs.hide,
   } as T;
 
   const Fragment = (
     <Provider store={store}>
       <CssVarsProvider theme={theme}>
-        <BaseDialog destroy={cbs.destroy} hide={cbs.hide} clickSpaceDestroy={true} {...config}>
-          <DialogComponent {...dialogProps} />
-        </BaseDialog>
+        <CommonContextProvider>
+          <BaseDialog destroy={cbs.destroy} clickSpaceDestroy={true} {...config}>
+            <DialogComponent {...dialogProps} />
+          </BaseDialog>
+        </CommonContextProvider>
       </CssVarsProvider>
     </Provider>
   );

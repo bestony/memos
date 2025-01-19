@@ -1,189 +1,143 @@
 {
-  "common": {
-    "about": "Om",
-    "email": "E-post",
-    "password": "Lösenord",
-    "username": "Användarnamn",
-    "nickname": "Smeknamn",
-    "save": "Spara",
-    "close": "Stäng",
-    "cancel": "Avbryt",
-    "create": "Skapa",
-    "change": "Ändra",
-    "confirm": "Bekräfta",
-    "reset": "Återställ",
-    "language": "Språk",
-    "version": "Version",
-    "pin": "Fäst",
-    "unpin": "Ta bort fäst",
-    "edit": "Redigera",
-    "restore": "Återställ",
-    "delete": "Radera",
-    "null": "Null",
-    "share": "Dela",
-    "archive": "Arkivera",
-    "basic": "Grundläggande",
-    "admin": "Admin",
-    "explore": "Utforska",
-    "sign-in": "Logga in",
-    "sign-up": "Bli medlem",
-    "sign-out": "Logga ut",
-    "type": "Typ",
-    "title": "Titel",
-    "filter": "Filter",
-    "tags": "Taggar",
-    "yourself": "Själv",
-    "changed": "Ändrad",
-    "fold": "Vik ihop",
-    "expand": "Expandera",
-    "image": "Bild",
-    "link": "Länk",
-    "vacuum": "Vacuum",
-    "select": "Select",
-    "avatar": "Avatar",
-    "database": "Databas",
-    "mark": "Mark"
-  },
   "auth": {
     "host-tip": "Du registerar dig som webbplatsvärd."
   },
-  "resource": {
-    "no-resources": "Inga resurser.",
-    "fetching-data": "hämtar data...",
-    "copy-link": "Kopiera länk",
-    "delete-resource": "Ta bort resurs",
-    "warning-text": "Är du säker på att du vill ta bort den här resursen? DENNA ÅTGÄRD ÄR OÅTERSTÄLLBAR❗",
-    "linked-amount": "Länkat antecknings belopp",
-    "warning-text-unused": "Är du säker på att du vill ta bort denna oanvända resurs? DENNA ÅTGÄRD ÄR OÅTERSTÄLLBAR❗",
-    "no-unused-resources": "Inga oanvända resurser",
-    "clear": "Rensa"
+  "common": {
+    "about": "Om",
+    "admin": "Admin",
+    "archive": "Arkivera",
+    "avatar": "Avatar",
+    "basic": "Grundläggande",
+    "cancel": "Avbryt",
+    "change": "Ändra",
+    "close": "Stäng",
+    "confirm": "Bekräfta",
+    "create": "Skapa",
+    "database": "Databas",
+    "delete": "Radera",
+    "edit": "Redigera",
+    "email": "E-post",
+    "explore": "Utforska",
+    "filter": "Filter",
+    "image": "Bild",
+    "language": "Språk",
+    "link": "Länk",
+    "mark": "Mark",
+    "nickname": "Smeknamn",
+    "null": "Null",
+    "password": "Lösenord",
+    "pin": "Fäst",
+    "reset": "Återställ",
+    "restore": "Återställ",
+    "save": "Spara",
+    "select": "Select",
+    "share": "Dela",
+    "sign-in": "Logga in",
+    "sign-out": "Logga ut",
+    "sign-up": "Bli medlem",
+    "tags": "Taggar",
+    "title": "Titel",
+    "type": "Typ",
+    "unpin": "Ta bort fäst",
+    "username": "Användarnamn",
+    "version": "Version",
+    "yourself": "Själv"
+  },
+  "days": {
+    "fri": "Fre",
+    "mon": "Mån",
+    "sat": "Lör",
+    "sun": "Sön",
+    "thu": "Tors",
+    "tue": "Tis",
+    "wed": "Ons"
   },
   "editor": {
-    "editing": "Redigerar...",
-    "cancel-edit": "Avbryt redigering",
-    "save": "Spara",
-    "placeholder": "Några tankar...",
-    "only-image-supported": "Endast bildfiler stöds.",
-    "cant-empty": "Innehållet får inte vara tomt",
-    "local": "Lokal",
-    "resources": "Resurser"
+    "any-thoughts": "Några tankar...",
+    "save": "Spara"
   },
   "memo": {
-    "view-detail": "Visa detaljer",
     "copy-link": "Kopiera länk",
+    "view-detail": "Visa detaljer",
     "visibility": {
+      "disabled": "Offentliga anteckningar är inaktiverade",
       "private": "Endast synlig för dig",
       "protected": "Synlig för medlemmar",
-      "public": "Synlig för alla",
-      "disabled": "Offentliga anteckningar är inaktiverade"
-    }
+      "public": "Synlig för alla"
+    },
+    "remove-completed-task-list-items": "Ta bort avklarade",
+    "remove-completed-task-list-items-confirm": "Är du säker på att du vill ta bort alla avklarade todo? (Detta är oåterkalleligt)"
   },
-  "tag-list": {
-    "tip-text": "Ange `#tag ` för att skapa"
+  "message": {
+    "change-memo-created-time": "Ändra anteckning skapade tid",
+    "copied": "Kopierad",
+    "fill-all": "Var god fyll i alla fält.",
+    "memo-not-found": "Anteckning hittades inte.",
+    "new-password-not-match": "Nya lösenord matchar inte.",
+    "password-changed": "Lösenord ändrat",
+    "password-not-match": "Lösenorden matchar inte.",
+    "restored-successfully": "Återställdes framgångsrikt",
+    "succeed-copy-link": "Länk kopierades framgångsrikt.",
+    "update-succeed": "Uppdateras framgångsrikt",
+    "user-not-found": "Användaren hittades inte",
+    "remove-completed-task-list-items-successfully": "Borttagning avklarade todo lyckades!"
+  },
+  "resource": {
+    "clear": "Rensa",
+    "copy-link": "Kopiera länk",
+    "delete-resource": "Ta bort resurs",
+    "fetching-data": "hämtar data...",
+    "linked-amount": "Länkat antecknings belopp",
+    "no-resources": "Inga resurser.",
+    "no-unused-resources": "Inga oanvända resurser"
   },
   "setting": {
-    "my-account": "Mitt konto",
-    "preference": "Preferenser",
+    "account-section": {
+      "change-password": "Ändra lösenord",
+      "title": "Kontoinformation",
+      "update-information": "Uppdatera informationen"
+    },
+    "appearance-option": {
+      "dark": "Alltid mörk",
+      "light": "Alltid ljus",
+      "system": "Follow system"
+    },
     "member": "Medlem",
     "member-list": "Medlemslista",
-    "system": "System",
-    "account-section": {
-      "title": "Kontoinformation",
-      "update-information": "Uppdatera informationen",
-      "change-password": "Ändra lösenord"
-    },
-    "preference-section": {
-      "theme": "Tema",
-      "default-memo-visibility": "Standard synlighet för anteckningar",
-      "enable-folding-memo": "Aktivera vikbara anteckningar",
-      "editor-font-style": "Redigerare teckensnitt",
-      "mobile-editor-style": "Mobilredigerade stil",
-      "default-memo-sort-option": "Anteckning visningstid",
-      "created_ts": "Skapade tid",
-      "updated_ts": "Upodaterad tid",
-      "enable-double-click": "Aktivera dubbelklick för att redigera",
-      "auto-collapse": "Autokollaps"
-    },
     "member-section": {
       "create-a-member": "Skapa en medlem"
     },
-    "system-section": {
-      "server-name": "Server Name",
-      "customize-server": {
-        "title": "Customize Server",
-        "default": "Default is memos",
-        "icon-url": "Icon URL"
-      },
-      "database-file-size": "Databas filstorlek",
-      "allow-user-signup": "Tillåt användarregistrering",
-      "additional-style": "Ytterligare stil",
-      "additional-script": "Ytterligare skript",
-      "additional-style-placeholder": "Ytterligare CSS kod",
-      "additional-script-placeholder": "Ytterligare JavaScript kod",
-      "disable-public-memos": "Inaktivera offentliga anteckningar",
-      "display-with-updated-time": "Display with updated time"
+    "my-account": "Mitt konto",
+    "preference": "Preferenser",
+    "preference-section": {
+      "default-memo-sort-option": "Anteckning visningstid",
+      "default-memo-visibility": "Standard synlighet för anteckningar",
+      "theme": "Tema"
     },
-    "appearance-option": {
-      "system": "Follow system",
-      "light": "Alltid ljus",
-      "dark": "Alltid mörk"
-    },
+    "sso": "SSO",
+    "storage": "Lagring",
     "storage-section": {
       "create-a-service": "Skapa en tjänst",
+      "delete-storage": "Ta bort lagring",
       "storage-services": "Lista över lagringstjänster",
       "update-a-service": "Uppdatera en tjänst",
-      "warning-text": "Är du säker på att ta bort den här lagringstjänsten? DEN HÄR ÅTGÄRDEN ÄR IRREVERSIBEL❗",
-      "delete-storage": "Ta bort lagring"
+      "warning-text": "Är du säker på att ta bort den här lagringstjänsten? DEN HÄR ÅTGÄRDEN ÄR IRREVERSIBEL❗"
     },
-    "storage": "Lagring",
-    "sso": "SSO"
-  },
-  "amount-text": {
-    "memo_one": "ANTECKNING",
-    "memo_other": "ANTECKNINGAR"
-  },
-  "message": {
-    "memos-ready": "alla anteckningar är redo 🎉",
-    "restored-successfully": "Återställdes framgångsrikt",
-    "memo-updated-datetime": "Anteckning skapad datum och tid ändrad",
-    "invalid-created-datetime": "Ogiltig skapad datumtid.",
-    "change-memo-created-time": "Ändra anteckning skapade tid",
-    "memo-not-found": "Anteckning hittades inte.",
-    "fill-all": "Var god fyll i alla fält.",
-    "password-not-match": "Lösenorden matchar inte.",
-    "new-password-not-match": "Nya lösenord matchar inte.",
-    "image-load-failed": "Bildladdning misslyckades",
-    "fill-form": "Vänligen fyll i detta formulär",
-    "login-failed": "Inloggningen misslyckades",
-    "signup-failed": "Registrering misslyckades",
-    "user-not-found": "Användaren hittades inte",
-    "password-changed": "Lösenord ändrat",
-    "private-only": "Denna anteckning är privat.",
-    "copied": "Kopierad",
-    "succeed-copy-content": "Innehåll kopierades framgångsrikt.",
-    "succeed-copy-link": "Länk kopierades framgångsrikt.",
-    "change-resource-filename": "Ändra resursfilnamn",
-    "resource-filename-updated": "Resursfilnamn ändrat.",
-    "invalid-resource-filename": "Ogiltligt filnamn.",
-    "click-to-save-the-image": "Klicka för att spara bilden",
-    "generating-the-screenshot": "Genererar skärmdumpen...",
-    "count-selected-resources": "Totalt valt",
-    "succeed-vacuum-database": "Succeed to vacuum database",
-    "succeed-update-additional-style": "Ytterligare stil uppdaterades framgångsrikt.",
-    "succeed-copy-resource-link": "Resurslänk kopierades framgångsrikt.",
-    "succeed-update-customized-profile": "Profil framgångsrikt anpassad.",
-    "succeed-update-additional-script": "Ytterligare skript uppdateras framgångsrikt.",
-    "update-succeed": "Uppdateras framgångsrikt",
-    "succeed-copy-code": "Kod kopierades framgångsrikt.",
-    "page-not-found": "404 - Sidan hittades inte 😥"
-  },
-  "days": {
-    "mon": "Mån",
-    "tue": "Tis",
-    "wed": "Ons",
-    "thu": "Tors",
-    "fri": "Fre",
-    "sat": "Lör",
-    "sun": "Sön"
+    "system": "System",
+    "system-section": {
+      "additional-script": "Ytterligare skript",
+      "additional-script-placeholder": "Ytterligare JavaScript kod",
+      "additional-style": "Ytterligare stil",
+      "additional-style-placeholder": "Ytterligare CSS kod",
+      "allow-user-signup": "Tillåt användarregistrering",
+      "customize-server": {
+        "icon-url": "Icon URL",
+        "title": "Customize Server"
+      },
+      "disable-public-memos": "Inaktivera offentliga anteckningar",
+      "display-with-updated-time": "Display with updated time",
+      "server-name": "Server Name",
+      "removed-completed-task-list-items": "Aktivera ta bort avklarade"
+    }
   }
 }

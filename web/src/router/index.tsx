@@ -1,49 +1,50 @@
-import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import App from "@/App";
+import RootLayout from "@/layouts/RootLayout";
 import SuspenseWrapper from "@/layouts/SuspenseWrapper";
-import { initialGlobalState } from "@/store/module";
-import AuthStatusProvider from "./AuthStatusProvider";
+import About from "@/pages/About";
+import AdminSignIn from "@/pages/AdminSignIn";
+import Archived from "@/pages/Archived";
+import AuthCallback from "@/pages/AuthCallback";
+import Explore from "@/pages/Explore";
+import Home from "@/pages/Home";
+import Inboxes from "@/pages/Inboxes";
+import MemoDetail from "@/pages/MemoDetail";
+import NotFound from "@/pages/NotFound";
+import PermissionDenied from "@/pages/PermissionDenied";
+import Resources from "@/pages/Resources";
+import Setting from "@/pages/Setting";
+import SignIn from "@/pages/SignIn";
+import SignUp from "@/pages/SignUp";
+import UserProfile from "@/pages/UserProfile";
 
-const Root = lazy(() => import("@/layouts/Root"));
-const SignIn = lazy(() => import("@/pages/SignIn"));
-const SignUp = lazy(() => import("@/pages/SignUp"));
-const AuthCallback = lazy(() => import("@/pages/AuthCallback"));
-const Explore = lazy(() => import("@/pages/Explore"));
-const Home = lazy(() => import("@/pages/Home"));
-const UserProfile = lazy(() => import("@/pages/UserProfile"));
-const MemoDetail = lazy(() => import("@/pages/MemoDetail"));
-const Archived = lazy(() => import("@/pages/Archived"));
-const Timeline = lazy(() => import("@/pages/Timeline"));
-const Resources = lazy(() => import("@/pages/Resources"));
-const Inboxes = lazy(() => import("@/pages/Inboxes"));
-const Setting = lazy(() => import("@/pages/Setting"));
-const About = lazy(() => import("@/pages/About"));
-const NotFound = lazy(() => import("@/pages/NotFound"));
-const PermissionDenied = lazy(() => import("@/pages/PermissionDenied"));
-
-const initialGlobalStateLoader = async () => {
-  try {
-    await initialGlobalState();
-  } catch (error) {
-    // do nothing.
-  }
-  return null;
-};
+export enum Routes {
+  ROOT = "/",
+  RESOURCES = "/resources",
+  INBOX = "/inbox",
+  ARCHIVED = "/archived",
+  SETTING = "/setting",
+  EXPLORE = "/explore",
+  ABOUT = "/about",
+  AUTH = "/auth",
+}
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    loader: () => initialGlobalStateLoader(),
     children: [
       {
-        path: "/auth/",
+        path: Routes.AUTH,
         element: <SuspenseWrapper />,
         children: [
           {
             path: "",
             element: <SignIn />,
+          },
+          {
+            path: "admin",
+            element: <AdminSignIn />,
           },
           {
             path: "signup",
@@ -56,63 +57,35 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "/",
-        element: <Root />,
+        path: Routes.ROOT,
+        element: <RootLayout />,
         children: [
           {
             path: "",
-            element: (
-              <AuthStatusProvider>
-                <Home />
-              </AuthStatusProvider>
-            ),
+            element: <Home />,
           },
           {
-            path: "timeline",
-            element: (
-              <AuthStatusProvider>
-                <Timeline />
-              </AuthStatusProvider>
-            ),
+            path: Routes.RESOURCES,
+            element: <Resources />,
           },
           {
-            path: "resources",
-            element: (
-              <AuthStatusProvider>
-                <Resources />
-              </AuthStatusProvider>
-            ),
+            path: Routes.INBOX,
+            element: <Inboxes />,
           },
           {
-            path: "inbox",
-            element: (
-              <AuthStatusProvider>
-                <Inboxes />
-              </AuthStatusProvider>
-            ),
+            path: Routes.ARCHIVED,
+            element: <Archived />,
           },
           {
-            path: "archived",
-            element: (
-              <AuthStatusProvider>
-                <Archived />
-              </AuthStatusProvider>
-            ),
+            path: Routes.SETTING,
+            element: <Setting />,
           },
           {
-            path: "setting",
-            element: (
-              <AuthStatusProvider>
-                <Setting />
-              </AuthStatusProvider>
-            ),
-          },
-          {
-            path: "explore",
+            path: Routes.EXPLORE,
             element: <Explore />,
           },
           {
-            path: "m/:memoId",
+            path: "m/:uid",
             element: <MemoDetail />,
           },
           {
@@ -120,7 +93,7 @@ const router = createBrowserRouter([
             element: <UserProfile />,
           },
           {
-            path: "about",
+            path: Routes.ABOUT,
             element: <About />,
           },
           {

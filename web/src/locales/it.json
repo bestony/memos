@@ -1,16 +1,4 @@
 {
-  "about": {
-    "about-memos": "Informazioni su Memos",
-    "memos-description": "Memos è un'applicazione per prendere appunti basata sul Web che puoi utilizzare per scrivere, organizzare e condividere appunti.",
-    "no-server-description": "Nessuna descrizione configurata per questo server.",
-    "other-projects": "Altri progetti",
-    "powered-by": "Powered by"
-  },
-  "amount-text": {
-    "memo_many": "",
-    "memo_one": "MEMO",
-    "memo_other": "MEMOS"
-  },
   "auth": {
     "host-tip": "Ti stai registrando come proprietario del sito.",
     "new-password": "Nuova password",
@@ -26,7 +14,6 @@
     "beta": "Beta",
     "cancel": "Cancella",
     "change": "Cambia",
-    "changed": "Modificato",
     "clear": "Pulisci",
     "close": "Chiudi",
     "confirm": "Conferma",
@@ -35,12 +22,9 @@
     "delete": "Elimina",
     "edit": "Modifica",
     "email": "Email",
-    "expand": "Espandi",
     "explore": "Esplora",
     "file": "File",
     "filter": "Filtro",
-    "filter-period": "{{from}} a {{to}}",
-    "fold": "Riduci",
     "home": "Home",
     "image": "Immagine",
     "language": "Lingua",
@@ -74,14 +58,9 @@
     "update": "Aggiorna",
     "upload": "Carica",
     "username": "Nome utente",
-    "vacuum": "Ottimizza",
     "version": "Versione",
     "visibility": "Visibilità",
     "yourself": "Te stesso"
-  },
-  "daily-review": {
-    "no-memos": "Nessun memo oggi.",
-    "title": "Revisione giornaliera"
   },
   "days": {
     "fri": "Ven",
@@ -93,32 +72,11 @@
     "wed": "Mer"
   },
   "editor": {
-    "cancel-edit": "Cancella modifica",
-    "cant-empty": "Il contenuto non può essere vuoto",
-    "editing": "Modificando...",
-    "local": "Locale",
-    "only-image-supported": "Solo immagini supportate.",
-    "placeholder": "Qualsiasi cosa pensi...",
-    "resources": "Risorse",
+    "any-thoughts": "Qualsiasi cosa pensi...",
     "save": "Salva"
-  },
-  "embed-memo": {
-    "copy": "Copia",
-    "only-public-supported": "* È possibile incorporare solo memo pubblici.",
-    "text": "Copia e incolla il codice qui sotto nel tuo blog o sito web.",
-    "title": "Includi memo"
-  },
-  "heatmap": {
-    "day": "giorno",
-    "days": "giorni",
-    "memo-in": "memo in {{period}}",
-    "memo-on": "{{amount}} memo il {{date}}",
-    "memos-in": "memos in {{period}}",
-    "memos-on": "{{amount}} memos il {{date}}"
   },
   "memo": {
     "archived-at": "Archiviato il",
-    "archived-memos": "Memo archiviati",
     "copy-link": "Copia link",
     "delete-confirm": "Sei sicuro di voler eliminare questo memo?\n\nQUESTA AZIONE È IRREVERSIBILE❗",
     "delete-memo": "Elimina Memo",
@@ -133,49 +91,25 @@
       "private": "Privato",
       "protected": "Visibile ai membri",
       "public": "Pubblico"
-    }
+    },
+    "remove-completed-task-list-items": "Rimuovi completato",
+    "remove-completed-task-list-items-confirm": "Sei sicuro di voler rimuovere tutte le cose completate? (Questa azione è irreversibile)"
   },
   "message": {
     "change-memo-created-time": "Cambia data creazione",
-    "change-resource-filename": "Cambia nome file",
-    "click-to-save-the-image": "Clicca per salvare l’immagine",
     "copied": "Copiato",
-    "count-selected-resources": "Totale selezionato",
-    "file-exceeds-upload-limit-of": "Il file supera il limite di upload di {{size}} MiB",
     "fill-all": "Per favore riempi tutti i campi",
-    "fill-form": "Per favore riempi il form",
-    "fill-server-name": "Per favore riempi il nome del server",
-    "generating-the-screenshot": "Generando screenshot…",
-    "image-load-failed": "Caricamento immagine fallito",
-    "invalid-created-datetime": "Data creazione non valida",
-    "invalid-resource-filename": "Nome file non valido",
-    "login-failed": "Login fallito",
     "maximum-upload-size-is": "La dimensione massima di upload è {{size}} MiB",
     "memo-not-found": "Memo non trovato",
-    "memo-updated-datetime": "Memo aggiornato con successo",
-    "memos-ready": "Tutti i memo sono stati caricati 🎉",
     "new-password-not-match": "Le nuove password non corrispondono",
     "no-data": "Nessun dato",
-    "page-not-found": "404 - Pagina non trovata 😥",
     "password-changed": "Password cambiata",
-    "password-login-disabled": "Il login con la password è disattivato",
     "password-not-match": "Le password non corrispondono",
-    "private-only": "Questo memo è impostato come privato.",
-    "resource-filename-updated": "Nome file aggiornato",
-    "resource-ready": "Tutte le risorse sono state caricate 🎉",
     "restored-successfully": "Ripristinato con successo",
-    "signup-failed": "Registrazione fallita",
-    "succeed-copy-code": "Codice copiato.",
-    "succeed-copy-content": "Contenuto copiato.",
     "succeed-copy-link": "Link copiato.",
-    "succeed-copy-resource-link": "Link risorsa copiato con successo.",
-    "succeed-update-additional-script": "Script aggiuntivo aggiornato con successo.",
-    "succeed-update-additional-style": "Stile aggiuntivo aggiornato con successo.",
-    "succeed-update-customized-profile": "Profilo personalizzato aggiornato con successo.",
-    "succeed-vacuum-database": "Database ottimizzato con successo.",
     "update-succeed": "Aggiornato con successo",
-    "updating-setting-failed": "Aggiornamento impostazioni fallito",
-    "user-not-found": "Utente non trovato"
+    "user-not-found": "Utente non trovato",
+    "remove-completed-task-list-items-successfully": "Rimosso con successo!"
   },
   "resource": {
     "clear": "Cancella",
@@ -207,11 +141,7 @@
     "no-unused-resources": "Nessuna risorsa inutilizzata",
     "reset-link": "Ripristina Link",
     "reset-link-prompt": "Sei sicuro di voler ripristinare questo link?\nQuesto renderà tutti i vecchi link inutilizzabili.\n\nQUESTA AZIONE È IRREVERSIBILE❗",
-    "reset-resource-link": "Ripristina link risorse",
-    "search-bar-placeholder": "Cerca risorse",
-    "upload-successfully": "Caricamento avvenuto con successo",
-    "warning-text": "Sei sicuro di voler eliminare questa risorsa?\n\nQUESTA AZIONE È IRREVERSIBILE❗",
-    "warning-text-unused": "Sei sicuro di voler eliminare le risorse inutilizzate?\n\nQUESTA AZIONE È IRREVERSIBILE❗"
+    "reset-resource-link": "Ripristina link risorse"
   },
   "setting": {
     "account-section": {
@@ -243,20 +173,9 @@
     "my-account": "Il mio account",
     "preference": "Preferenze",
     "preference-section": {
-      "auto-collapse": "Riduci automaticamente",
-      "created_ts": "Tempo di creazione",
-      "daily-review-time-offset": "Ora di revisione giornaliera",
       "default-memo-sort-option": "Ordinamento memo predefinito",
       "default-memo-visibility": "Visibilità memo predefinita",
-      "default-resource-visibility": "Visibilità risorsa predefinita",
-      "editor-font-style": "Stile font editor",
-      "enable-double-click": "Abilita doppio click per modificare",
-      "enable-folding-memo": "Abilita riduzione memo",
-      "mobile-editor-style": "Stile editor mobile",
-      "telegram-user-id": "UserID Telegram",
-      "telegram-user-id-placeholder": "Salva i messaggi al tuo bot telegram come memo",
-      "theme": "Tema",
-      "updated_ts": "Tempo di aggiornamento"
+      "theme": "Tema"
     },
     "sso": "SSO",
     "sso-section": {
@@ -323,13 +242,11 @@
       "allow-user-signup": "Consenti registrazione utente",
       "customize-server": {
         "appearance": "Aspetto server",
-        "default": "Preferinito è Memos",
         "description": "Descrizione",
         "icon-url": "URL icona",
         "locale": "Server Locale",
         "title": "Personalizza server"
       },
-      "database-file-size": "Dimensione file database",
       "disable-password-login": "Disabilita login password",
       "disable-password-login-final-warning": "Digita \"CONFERMA\" se sai cosa stai facendo.",
       "disable-password-login-warning": "Ciò disabiliterà l'accesso tramite password per tutti gli utenti. Non è possibile accedere senza ripristinare questa impostazione nel database se i provider di identità configurati falliscono. Dovrai anche prestare molta attenzione quando rimuovi un provider di identità❗",
@@ -340,16 +257,11 @@
       "max-upload-size": "Dimensione massima caricamento (MiB)",
       "max-upload-size-hint": "Valore consigliato di 32 MiB.",
       "server-name": "Nome server",
-      "telegram-bot-token": "Token Bot Telegram",
-      "telegram-bot-token-description": "Token bot Telegram o API Proxy come `http.../bot<token>`",
-      "telegram-bot-token-placeholder": "Il token del tuo bot Telegram"
+      "removed-completed-task-list-items": "Abilita rimuovi completato"
     }
   },
-  "tag-list": {
+  "tag": {
     "all-tags": "Tutti i Tags",
-    "create-tag": "Crea Tag",
-    "invalid-tag-name": "Nome tag non valido",
-    "tag-name": "NOME_TAG",
-    "tip-text": "Scrivi `#tag` per crearlo"
+    "create-tag": "Crea Tag"
   }
 }

@@ -2,6 +2,11 @@ package store
 
 import (
 	"context"
+	"errors"
+
+	"github.com/usememos/memos/internal/util"
+
+	storepb "github.com/usememos/memos/proto/gen/store"
 )
 
 // Visibility is the type of a visibility.
@@ -29,7 +34,10 @@ func (v Visibility) String() string {
 }
 
 type Memo struct {
+	// ID is the system generated unique identifier for the memo.
 	ID int32
+	// UID is the user defined unique identifier for the memo.
+	UID string
 
 	// Standard fields
 	RowStatus RowStatus
@@ -40,6 +48,7 @@ type Memo struct {
 	// Domain specific fields
 	Content    string
 	Visibility Visibility
+	Payload    *storepb.MemoPayload
 
 	// Composed fields
 	Pinned   bool
@@ -47,7 +56,8 @@ type Memo struct {
 }
 
 type FindMemo struct {
-	ID *int32
+	ID  *int32
+	UID *string
 
 	// Standard fields
 	RowStatus       *RowStatus
@@ -60,23 +70,39 @@ type FindMemo struct {
 	// Domain specific fields
 	ContentSearch   []string
 	VisibilityList  []Visibility
+	PayloadFind     *FindMemoPayload
 	ExcludeContent  bool
 	ExcludeComments bool
+	Random          bool
 
 	// Pagination
-	Limit            *int
-	Offset           *int
+	Limit  *int
+	Offset *int
+
+	// Ordering
 	OrderByUpdatedTs bool
 	OrderByPinned    bool
+	OrderByTimeAsc   bool
+}
+
+type FindMemoPayload struct {
+	Raw                *string
+	TagSearch          []string
+	HasLink            bool
+	HasTaskList        bool
+	HasCode            bool
+	HasIncompleteTasks bool
 }
 
 type UpdateMemo struct {
 	ID         int32
+	UID        *string
 	CreatedTs  *int64
 	UpdatedTs  *int64
 	RowStatus  *RowStatus
 	Content    *string
 	Visibility *Visibility
+	Payload    *storepb.MemoPayload
 }
 
 type DeleteMemo struct {
@@ -84,6 +110,9 @@ type DeleteMemo struct {
 }
 
 func (s *Store) CreateMemo(ctx context.Context, create *Memo) (*Memo, error) {
+	if !util.UIDMatcher.MatchString(create.UID) {
+		return nil, errors.New("invalid uid")
+	}
 	return s.driver.CreateMemo(ctx, create)
 }
 
@@ -105,6 +134,9 @@ func (s *Store) GetMemo(ctx context.Context, find *FindMemo) (*Memo, error) {
 }
 
 func (s *Store) UpdateMemo(ctx context.Context, update *UpdateMemo) error {
+	if update.UID != nil && !util.UIDMatcher.MatchString(*update.UID) {
+		return errors.New("invalid uid")
+	}
 	return s.driver.UpdateMemo(ctx, update)
 }
 

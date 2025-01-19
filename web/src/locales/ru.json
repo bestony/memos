@@ -1,20 +1,11 @@
 {
-  "about": {
-    "about-memos": "О Memos",
-    "memos-description": "Memos - это веб-приложение для создания заметок, которое вы можете использовать для написания, упорядочивания заметок и обмена ими.",
-    "no-server-description": "Описание для этого сервера не настроено.",
-    "other-projects": "Другие проекты",
-    "powered-by": "Создано"
-  },
-  "amount-text": {
-    "memo_few": "",
-    "memo_many": "",
-    "memo_one": "ЗАПИСЬ"
-  },
   "auth": {
+    "create-your-account": "Создайте свою учетную запись",
     "host-tip": "Вы регистрируете владельца сайта.",
     "new-password": "Новый пароль",
-    "repeat-new-password": "Повторить новый пароль"
+    "repeat-new-password": "Повторить новый пароль",
+    "sign-in-tip": "У вас уже есть учетная запись?",
+    "sign-up-tip": "У вас еще нет учетной записи?"
   },
   "common": {
     "about": "О Memos",
@@ -26,26 +17,27 @@
     "beta": "Beta",
     "cancel": "Отменить",
     "change": "Заменить",
-    "changed": "изменено",
     "clear": "Очистить",
     "close": "Закрыть",
     "confirm": "Подтвердить",
     "create": "Создать",
     "database": "База данных",
+    "days": "Дни",
     "delete": "Удалить",
+    "description": "Описание",
     "edit": "Редактировать",
     "email": "Email",
-    "expand": "Развернуть",
     "explore": "Обзор",
+    "file": "Файл",
     "filter": "Фильтр",
-    "filter-period": "{{from}} по {{to}}",
-    "fold": "Свернуть",
     "home": "Главная",
     "image": "Изображение",
+    "inbox": "Входящие",
     "language": "Язык",
     "learn-more": "Узнать больше",
     "link": "Ссылка",
     "mark": "Связать",
+    "memos": "Заметки",
     "name": "Название",
     "new": "Новая запись",
     "nickname": "Псевдоним",
@@ -53,12 +45,17 @@
     "or": "или",
     "password": "Пароль",
     "pin": "Закрепить",
+    "pinned": "Закреплено",
     "preview": "Предпросмотр",
+    "profile": "Профиль",
+    "remember-me": "Remember me",
     "rename": "Переименовать",
     "reset": "Сбросить",
     "resources": "Ресурсы",
     "restore": "Восстановить",
+    "role": "Роль",
     "save": "Сохранить",
+    "search": "Поиск",
     "select": "Выбрать",
     "settings": "Настройки",
     "share": "Поделиться",
@@ -66,6 +63,7 @@
     "sign-in-with": "Войти через {{provider}}",
     "sign-out": "Выйти",
     "sign-up": "Зарегистрироваться",
+    "statistics": "Статистика",
     "tags": "Теги",
     "title": "Заголовок",
     "type": "Тип",
@@ -73,7 +71,6 @@
     "update": "Изменить",
     "upload": "Загрузить",
     "username": "Имя",
-    "vacuum": "Сжать",
     "version": "Версия",
     "visibility": "Видимость",
     "yourself": "Вы"
@@ -88,87 +85,59 @@
     "wed": "Ср."
   },
   "editor": {
-    "cancel-edit": "Отменить",
-    "cant-empty": "Содержимое не может быть пустым",
-    "editing": "Редактирование...",
-    "local": "На устройстве",
-    "only-image-supported": "Поддерживаются только изображения.",
-    "placeholder": "Ваши мысли...",
-    "resources": "Ресурсы",
+    "add-your-comment-here": "Оставь свой комментарий здесь ...",
+    "any-thoughts": "Ваши мысли...",
     "save": "Сохранить"
   },
-  "embed-memo": {
-    "copy": "Скопировать",
-    "only-public-supported": "* Поддерживаются только публичные записи",
-    "text": "Скопируйте и вставьте код в Ваш блог или сайт",
-    "title": "Встраивание записи"
-  },
-  "heatmap": {
-    "day": "день",
-    "days": "дней",
-    "memo-in": "запись за {{period}}",
-    "memo-on": "{{amount}} запись за {{date}}",
-    "memos-in": "записей за {{period}}",
-    "memos-on": "{{amount}} записей за {{date}}"
+  "inbox": {
+    "version-update": "Новая версия {{version}} уже доступна!"
   },
   "memo": {
     "archived-at": "Архив",
-    "archived-memos": "Заархивированные записи",
+    "comment": {
+      "self": "Комментарии"
+    },
     "copy-link": "Скопировать ссылку",
-    "delete-confirm": "Вы уверены, что хотите удалить эту запись?\nЭТО ДЕЙСТВИЕ НЕВОЗМОЖНО ОТМЕНИТЬ❗",
+    "delete-confirm": "Вы уверены, что хотите удалить эту запись?\nЭТО ДЕЙСТВИЕ НЕВОЗМОЖНО ОТМЕНИТЬ!",
     "delete-memo": "Удаление записи",
     "embed": "Встроить запись",
     "fetch-more": "Загрузить больше",
-    "fetching-data": "загрузка данных...",
+    "fetching-data": "загрузка данных…",
     "no-archived-memos": "Нет заархивированных записей.",
     "search-placeholder": "Поиск записей",
+    "show-more": "Подробнее",
+    "show-less": "Показать меньше",
     "view-detail": "Подробно",
     "visibility": {
       "disabled": "Публичные записи отключены",
       "private": "Видно только вам",
       "protected": "Видно только пользователям",
       "public": "Видно всем"
-    }
+    },
+    "remove-completed-task-list-items": "Удалить выполненные",
+    "remove-completed-task-list-items-confirm": "Вы уверены, что хотите удалить все выполненные задачи? (Данное действие необратимо)"
   },
   "message": {
+    "archived-successfully": "Успешная архивация",
     "change-memo-created-time": "Изменить время создания записи",
-    "change-resource-filename": "Изменить имя файла",
-    "click-to-save-the-image": "Нажмите для сохранения изображения",
     "copied": "Скопировано",
-    "count-selected-resources": "Всего выбрано",
-    "file-exceeds-upload-limit-of": "Файл {{file}} превышает лимит на загрузку {{size}} МБ",
+    "deleted-successfully": "Успешное удаление",
     "fill-all": "Пожалуйста, заполните все поля.",
-    "fill-form": "Пожалуйста, заполните форму",
-    "fill-server-name": "Пожалуйста, введите имя сервера",
-    "generating-the-screenshot": "Создание снимка...",
-    "image-load-failed": "Ошибка загрузки изображения",
-    "invalid-created-datetime": "Неверное время создания.",
-    "invalid-resource-filename": "Неверное имя файла.",
-    "login-failed": "Ошибка входа",
     "maximum-upload-size-is": "Максимальный размер для загрузки {{size}} МБ",
     "memo-not-found": "Запись не найдена.",
-    "memo-updated-datetime": "Время создания изменено.",
-    "memos-ready": "больше записей нет 🎉",
     "new-password-not-match": "Новый пароль не совпадает.",
     "no-data": "Данные не были найдены.",
-    "page-not-found": "404 - Страница не найдена 😥",
     "password-changed": "Пароль изменён",
     "password-not-match": "Пароли не совпадают.",
-    "private-only": "Это частная заметка.",
-    "resource-filename-updated": "Имя файла изменено.",
-    "resource-ready": "больше ресурсов нет 🎉",
     "restored-successfully": "Успешно восстановлено.",
-    "signup-failed": "Ошибка регистрации",
-    "succeed-copy-code": "Код успешно скопирован.",
-    "succeed-copy-content": "Скопировано в буфер обмена.",
     "succeed-copy-link": "Ссылка скопирована в буфер обмена.",
-    "succeed-copy-resource-link": "Ссылка на файл скопирована в буфер обмена",
-    "succeed-update-additional-script": "Настраиваемый скрипт успешно обновлён",
-    "succeed-update-additional-style": "Настраиваемый стиль успешно обновлен",
-    "succeed-update-customized-profile": "Собственный профиль успешно обновлён",
-    "succeed-vacuum-database": "База данных успешно сжата",
     "update-succeed": "Успешно обновлено",
-    "user-not-found": "Пользователь не найден"
+    "user-not-found": "Пользователь не найден",
+    "remove-completed-task-list-items-successfully": "Удалено успешно!"
+  },
+  "reference": {
+    "add-references": "Добавить ссылку",
+    "embedded-usage": "Вставить контент"
   },
   "resource": {
     "clear": "Удалить неиспользуемые",
@@ -184,7 +153,7 @@
         "type-placeholder": "Тип файла"
       },
       "local-file": {
-        "choose": "Выберите файл...",
+        "choose": "Выберите файл…",
         "option": "Локальный файл"
       },
       "title": "Создать ресурс",
@@ -195,21 +164,22 @@
     "fetching-data": "загрузка данных...",
     "file-drag-drop-prompt": "Перетащите ваш файл сюда, чтобы загрузить его",
     "linked-amount": "Количество записей",
-    "no-files-selected": "Нет выбранных файлов❗",
+    "no-files-selected": "Файлы не выбраны",
     "no-resources": "Нет ресурсов.",
     "no-unused-resources": "Нет неиспользуемых ресурсов",
     "reset-link": "Удалить ссылку",
-    "reset-link-prompt": "Вы уверены, что хотите удалить ссылку? Все использования этой ссылки будут сломаны.\nЭТО ДЕЙСТВИЕ НЕВОЗМОЖНО ОТМЕНИТЬ❗",
-    "reset-resource-link": "Удаление ссылки на ресурс",
-    "search-bar-placeholder": "Поиск ресурсов",
-    "upload-successfully": "Загрузка окончена",
-    "warning-text": "Вы уверены, что хотите выбранные ресурсы?\nЭТО ДЕЙСТВИЕ НЕВОЗМОЖНО ОТМЕНИТЬ❗",
-    "warning-text-unused": "Вы уверены, что хотите удалить неиспользуемые ресурсы?\nЭТО ДЕЙСТВИЕ НЕВОЗМОЖНО ОТМЕНИТЬ❗"
+    "reset-link-prompt": "Вы уверены, что хотите удалить ссылку? Все использования этой ссылки будут сломаны.\nЭТО ДЕЙСТВИЕ НЕВОЗМОЖНО ОТМЕНИТЬ!",
+    "reset-resource-link": "Удаление ссылки на ресурс"
+  },
+  "router": {
+    "back-to-top": "В начало",
+    "go-to-home": "Домой"
   },
   "setting": {
     "account-section": {
       "change-password": "Изменить пароль",
       "email-note": "Опционально",
+      "export-memos": "Экспорт заметок",
       "nickname-note": "Отображается на баннере",
       "openapi-reset": "Очистить ключ OpenAPI",
       "openapi-sample-post": "Привет #memos от {{url}}",
@@ -228,35 +198,24 @@
     "member-list": "Список пользователей",
     "member-section": {
       "archive-member": "Деактивировать",
-      "archive-warning": "❗ Вы уверены, что хотите деактивировать пользователя {{username}}?",
+      "archive-warning": "Вы уверены, что хотите деактивировать пользователя {{username}}?",
       "create-a-member": "Создать",
       "delete-member": "Удалить",
-      "delete-warning": "❗ Вы уверены, что хотите удалить пользователя {{username}}?\nЭТО ДЕЙСТВИЕ НЕВОЗМОЖНО ОТМЕНИТЬ❗"
+      "delete-warning": "Вы уверены, что хотите удалить пользователя {{username}}?\nЭТО ДЕЙСТВИЕ НЕВОЗМОЖНО ОТМЕНИТЬ!"
     },
     "my-account": "Мой аккаунт",
     "preference": "Настройки",
     "preference-section": {
-      "auto-collapse": "Автоматическое свертывание",
-      "created_ts": "Время создания",
-      "daily-review-time-offset": "Смещение времени ежедневного просмотра",
       "default-memo-sort-option": "Отображаемое время записи",
       "default-memo-visibility": "Видимость записей по умолчанию",
-      "default-resource-visibility": "Видимость ресурсов по умолчанию",
-      "editor-font-style": "Стиль шрифта",
-      "enable-double-click": "Разрешить двойной клик для редактирования",
-      "enable-folding-memo": "Включить сворачивание записей",
-      "mobile-editor-style": "Стиль мобильного редактора",
-      "telegram-user-id": "ID пользователя Telegram",
-      "telegram-user-id-placeholder": "Отправьте любое сообщение своему Telegram-боту, чтобы узнать ID",
-      "theme": "Тема",
-      "updated_ts": "Время обновления"
+      "theme": "Тема"
     },
     "sso": "SSO",
     "sso-section": {
       "authorization-endpoint": "Конечная точка авторизации",
       "client-id": "ID клиента",
       "client-secret": "Секрет клиента",
-      "confirm-delete": "Вы уверены, что хотите удалить конфигурацию SSO \"{{name}}\"?\n\nЭТО ДЕЙСТВИЕ НЕОБРАТИМО❗",
+      "confirm-delete": "Вы уверены, что хотите удалить конфигурацию SSO \"{{name}}\"?\nЭТО ДЕЙСТВИЕ НЕОБРАТИМО!",
       "create-sso": "Создать SSO",
       "custom": "Собственный",
       "delete-sso": "Подтвердите удаление",
@@ -288,6 +247,7 @@
       "path": "Путь к хранилищу",
       "path-description": "Вы можете использовать переменные от локального хранилища, например {filename}",
       "path-placeholder": "пользовательский/путь",
+      "presign-placeholder": "Генерировать временную публичную ссылку, необязательно",
       "region": "Регион",
       "region-placeholder": "Название региона",
       "s3-compatible-url": "S3 совместимый URL",
@@ -304,7 +264,7 @@
       "url-prefix-placeholder": "Пользовательский префикс URL, необязательно",
       "url-suffix": "суффикс URL",
       "url-suffix-placeholder": "Пользовательский суффикс URL, необязательно",
-      "warning-text": "Вы уверены, что хотите удалить это хранилище?\nЭТО ДЕЙСТВИЕ НЕВОЗМОЖНО ОТМЕНИТЬ❗"
+      "warning-text": "Вы уверены, что хотите удалить это хранилище?\nЭТО ДЕЙСТВИЕ НЕВОЗМОЖНО ОТМЕНИТЬ!"
     },
     "system": "Системные",
     "system-section": {
@@ -315,27 +275,28 @@
       "allow-user-signup": "Разрешить регистрацию пользователей",
       "customize-server": {
         "appearance": "Тема",
-        "default": "По умолчанию: memos",
         "description": "Описание",
         "icon-url": "URL иконки",
         "locale": "Язык",
         "title": "Настроить сервер"
       },
-      "database-file-size": "Размер файла базы данных",
       "disable-public-memos": "Отключить публичные записи",
       "display-with-updated-time": "Отображать время обновления записи",
       "max-upload-size": "Максимальный размер загрузки (МБ)",
       "max-upload-size-hint": "Рекомендуемое значение 32 MБ.",
       "server-name": "Имя сервера",
-      "telegram-bot-token": "Токен Telegram бота",
-      "telegram-bot-token-description": "Токен Telegram бота или прокси API вида `http.../bot<token>`",
-      "telegram-bot-token-placeholder": "Ваш токен Telegram бота"
+      "removed-completed-task-list-items": "Включить удаление выполненных"
     }
   },
-  "tag-list": {
+  "tag": {
     "all-tags": "Все теги",
     "create-tag": "Создать тег",
-    "tag-name": "Тег",
-    "tip-text": "Введите `#tag` для создания"
+    "create-tags-guide": "Вы можете создать тек, используя `#tag`",
+    "delete-confirm": "Вы точно хотите удалить этот тег?",
+    "delete-tag": "Удалить тег",
+    "no-tag-found": "Тег не найден"
+  },
+  "timeline": {
+    "title": "Лента"
   }
 }

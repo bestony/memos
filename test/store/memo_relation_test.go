@@ -15,6 +15,7 @@ func TestMemoRelationStore(t *testing.T) {
 	user, err := createTestingHostUser(ctx, ts)
 	require.NoError(t, err)
 	memoCreate := &store.Memo{
+		UID:        "main-memo",
 		CreatorID:  user.ID,
 		Content:    "main memo content",
 		Visibility: store.Public,
@@ -23,6 +24,7 @@ func TestMemoRelationStore(t *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, memoCreate.Content, memo.Content)
 	relatedMemoCreate := &store.Memo{
+		UID:        "related-memo",
 		CreatorID:  user.ID,
 		Content:    "related memo content",
 		Visibility: store.Public,
@@ -31,6 +33,7 @@ func TestMemoRelationStore(t *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, relatedMemoCreate.Content, relatedMemo.Content)
 	commentMemoCreate := &store.Memo{
+		UID:        "comment-memo",
 		CreatorID:  user.ID,
 		Content:    "comment memo content",
 		Visibility: store.Public,

@@ -4,6 +4,7 @@ import (
 	"context"
 	"testing"
 
+	"github.com/lithammer/shortuuid/v4"
 	"github.com/stretchr/testify/require"
 
 	"github.com/usememos/memos/store"
@@ -13,13 +14,12 @@ func TestResourceStore(t *testing.T) {
 	ctx := context.Background()
 	ts := NewTestingStore(ctx, t)
 	_, err := ts.CreateResource(ctx, &store.Resource{
-		CreatorID:    101,
-		Filename:     "test.epub",
-		Blob:         []byte("test"),
-		InternalPath: "",
-		ExternalLink: "",
-		Type:         "application/epub+zip",
-		Size:         637607,
+		UID:       shortuuid.New(),
+		CreatorID: 101,
+		Filename:  "test.epub",
+		Blob:      []byte("test"),
+		Type:      "application/epub+zip",
+		Size:      637607,
 	})
 	require.NoError(t, err)
 

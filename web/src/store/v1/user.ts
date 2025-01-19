@@ -1,18 +1,17 @@
 import { create } from "zustand";
 import { combine } from "zustand/middleware";
 import { authServiceClient, userServiceClient } from "@/grpcweb";
-import { User, UserSetting } from "@/types/proto/api/v2/user_service";
-import { UserNamePrefix, extractUsernameFromName } from "./resourceName";
+import { User, UserSetting, User_Role } from "@/types/proto/api/v1/user_service";
 
 interface State {
-  userMapByUsername: Record<string, User>;
-  // The name of current user. Format: `users/${username}`
+  userMapByName: Record<string, User>;
+  // The name of current user. Format: `users/${uid}`
   currentUser?: string;
   userSetting?: UserSetting;
 }
 
 const getDefaultState = (): State => ({
-  userMapByUsername: {},
+  userMapByName: {},
   currentUser: undefined,
   userSetting: undefined,
 });
@@ -30,57 +29,75 @@ const requestCache = new Map<string, Promise<any>>();
 
 export const useUserStore = create(
   combine(getDefaultState(), (set, get) => ({
+    getState: () => get(),
     fetchUsers: async () => {
       const { users } = await userServiceClient.listUsers({});
-      const userMap = get().userMapByUsername;
+      const userMap = get().userMapByName;
       for (const user of users) {
-        userMap[user.username] = user;
+        userMap[user.name] = user;
       }
-      set({ userMapByUsername: userMap });
+      set({ userMapByName: userMap });
       return users;
     },
-    getOrFetchUserByUsername: async (username: string) => {
-      const userMap = get().userMapByUsername;
-      if (userMap[username]) {
-        return userMap[username] as User;
+    getOrFetchUserByName: async (name: string) => {
+      const userMap = get().userMapByName;
+      if (userMap[name]) {
+        return userMap[name] as User;
       }
-      if (requestCache.has(username)) {
-        return await requestCache.get(username);
+      if (requestCache.has(name)) {
+        return await requestCache.get(name);
       }
 
       const promisedUser = userServiceClient
         .getUser({
-          name: `${UserNamePrefix}${username}`,
+          name: name,
         })
-        .then(({ user }) => user);
-      requestCache.set(username, promisedUser);
+        .then((user) => user);
+      requestCache.set(name, promisedUser);
       const user = await promisedUser;
       if (!user) {
         throw new Error("User not found");
       }
-      requestCache.delete(username);
-      userMap[username] = user;
-      set({ userMapByUsername: userMap });
+      requestCache.delete(name);
+      userMap[name] = user;
+      set({ userMapByName: userMap });
       return user;
     },
-    getUserByUsername: (username: string) => {
-      const userMap = get().userMapByUsername;
-      return userMap[username];
+    listUsers: async () => {
+      const { users } = await userServiceClient.listUsers({});
+      const userMap = get().userMapByName;
+      for (const user of users) {
+        userMap[user.name] = user;
+      }
+      set({ userMapByName: userMap });
+      return users;
+    },
+    searchUsers: async (filter: string) => {
+      const { users } = await userServiceClient.searchUsers({
+        filter,
+      });
+      const userMap = get().userMapByName;
+      for (const user of users) {
+        userMap[user.name] = user;
+      }
+      set({ userMapByName: userMap });
+      return users;
+    },
+    getUserByName: (name: string) => {
+      const userMap = get().userMapByName;
+      return userMap[name];
     },
     updateUser: async (user: Partial<User>, updateMask: string[]) => {
-      const { user: updatedUser } = await userServiceClient.updateUser({
+      const updatedUser = await userServiceClient.updateUser({
         user: user,
         updateMask: updateMask,
       });
-      if (!updatedUser) {
-        throw new Error("User not found");
+      const userMap = get().userMapByName;
+      if (user.name && user.name !== updatedUser.name) {
+        delete userMap[user.name];
       }
-      const userMap = get().userMapByUsername;
-      if (user.name !== updatedUser.name) {
-        delete userMap[extractUsernameFromName(user.name)];
-      }
-      userMap[updatedUser.username] = updatedUser;
-      set({ userMapByUsername: userMap });
+      userMap[updatedUser.name] = updatedUser;
+      set({ userMapByName: userMap });
       if (user.name === get().currentUser) {
         set({ currentUser: updatedUser.name });
       }
@@ -90,20 +107,16 @@ export const useUserStore = create(
       await userServiceClient.deleteUser({
         name,
       });
-      const username = extractUsernameFromName(name);
-      const userMap = get().userMapByUsername;
-      delete userMap[username];
-      set({ userMapByUsername: userMap });
+      const userMap = get().userMapByName;
+      delete userMap[name];
+      set({ userMapByName: userMap });
     },
     fetchCurrentUser: async () => {
-      const { user } = await authServiceClient.getAuthStatus({});
-      if (!user) {
-        throw new Error("User not found");
-      }
-      const userMap = get().userMapByUsername;
-      userMap[user.username] = user;
-      set({ currentUser: user.name, userMapByUsername: userMap });
-      const { setting } = await userServiceClient.getUserSetting({});
+      const user = await authServiceClient.getAuthStatus({});
+      const userMap = get().userMapByName;
+      userMap[user.name] = user;
+      set({ currentUser: user.name, userMapByName: userMap });
+      const setting = await userServiceClient.getUserSetting({});
       set({
         userSetting: UserSetting.fromPartial({
           ...getDefaultUserSetting(),
@@ -113,15 +126,22 @@ export const useUserStore = create(
       return user;
     },
     updateUserSetting: async (userSetting: Partial<UserSetting>, updateMask: string[]) => {
-      const { setting: updatedUserSetting } = await userServiceClient.updateUserSetting({
+      const updatedUserSetting = await userServiceClient.updateUserSetting({
         setting: userSetting,
         updateMask: updateMask,
       });
-      if (!updatedUserSetting) {
-        throw new Error("User setting not found");
-      }
       set({ userSetting: updatedUserSetting });
       return updatedUserSetting;
     },
-  }))
+  })),
 );
+
+export const stringifyUserRole = (role: User_Role) => {
+  if (role === User_Role.HOST) {
+    return "Host";
+  } else if (role === User_Role.ADMIN) {
+    return "Admin";
+  } else {
+    return "User";
+  }
+};

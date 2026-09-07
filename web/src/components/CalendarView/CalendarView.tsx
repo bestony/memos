@@ -121,9 +121,9 @@ export const CalendarView = ({ month, date }: CalendarViewProps) => {
   const isEmptyMonth = !isLoading && !error && Object.keys(model).length === 0;
 
   return (
-    <div className="mx-auto flex w-full max-w-7xl items-start gap-6">
+    <div className="flex w-full items-start gap-6">
       {/* From xl the section is sticky and viewport-tall so the grid can fill it beside the panel. */}
-      <section className="mx-auto flex w-full min-w-0 max-w-5xl flex-1 flex-col gap-1 xl:sticky xl:top-6 xl:h-[calc(100dvh-3.5rem)]">
+      <section className="flex w-full min-w-0 flex-1 flex-col gap-1 xl:sticky xl:top-6 xl:h-[calc(100dvh-3.5rem)]">
         <CalendarHeader month={month} monthLabel={monthLabel} today={today} activeDate={activeDate} closable={md} />
         <CalendarGrid
           month={month}

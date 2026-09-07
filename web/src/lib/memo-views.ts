@@ -41,8 +41,6 @@ export const isCalendarRoute = (pathname: string): boolean => {
 /**
  * Routes that render a memo collection the sidebar can narrow: the scope routes, a user
  * profile and the calendar. Views, calendar days and tags apply in place on all of them.
- * This is a different question from `isMemoCollectionOrigin` (MemoView/navigation.ts),
- * which asks whether a memo origin is a collection whose full URL is worth returning to.
  */
 export const isMemoCollectionRoute = (pathname: string): boolean =>
   isMemoScopeRoute(pathname) || getProfileUsername(pathname) !== undefined || isCalendarRoute(pathname);

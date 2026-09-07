@@ -67,9 +67,7 @@ describe("<AttachmentMediaGrid>", () => {
 
     fireEvent.click(memoLink);
     expect(onPreview).not.toHaveBeenCalled();
-    expect(screen.getByTestId("location-state")).toHaveTextContent(
-      '{"from":"/spaces/product/attachments?filter=tagSearch%3Awork","fromScope":"preserve"}',
-    );
+    expect(screen.getByTestId("location-state")).toHaveTextContent('{"from":"/spaces/product/attachments?filter=tagSearch%3Awork"}');
   });
 
   it("keeps video duration inside the existing play badge", () => {

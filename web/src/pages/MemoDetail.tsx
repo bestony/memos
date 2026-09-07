@@ -6,7 +6,7 @@ import MemoCommentSection, { type MemoCommentSectionHandle } from "@/components/
 import { MentionResolutionProvider } from "@/components/MemoContent/MentionResolutionContext";
 import MemoView, { type MemoViewHandle } from "@/components/MemoView";
 import { computeCommentAmount } from "@/components/MemoView/MemoViewContext";
-import { createMemoNavigationState, type MemoOriginScope, resolveMemoDetailOrigin } from "@/components/MemoView/navigation";
+import { createMemoNavigationState, resolveMemoDetailOrigin } from "@/components/MemoView/navigation";
 import { useAppSidebar } from "@/contexts/AppSidebarContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useInstance } from "@/contexts/InstanceContext";
@@ -25,7 +25,6 @@ const MemoSidebarRegistration = ({
   memo,
   parentMemo,
   from,
-  fromScope,
   hasExplicitOrigin,
   commentCount,
   readonly,
@@ -37,7 +36,6 @@ const MemoSidebarRegistration = ({
   memo: Memo;
   parentMemo?: Memo;
   from: string;
-  fromScope: MemoOriginScope;
   hasExplicitOrigin: boolean;
   commentCount?: number;
   readonly: boolean;
@@ -53,7 +51,6 @@ const MemoSidebarRegistration = ({
       memo,
       parentMemo,
       from,
-      fromScope,
       hasExplicitOrigin,
       commentCount,
       readonly,
@@ -65,7 +62,6 @@ const MemoSidebarRegistration = ({
   }, [
     commentCount,
     from,
-    fromScope,
     hasExplicitOrigin,
     memo,
     onCommentCreate,
@@ -113,8 +109,7 @@ const MemoDetail = () => {
   const hasExplicitOrigin =
     !!locationState && typeof locationState === "object" && typeof (locationState as { from?: unknown }).from === "string";
   const resolvedOrigin = resolveMemoDetailOrigin(locationState, { memoArchived: memo?.state === State.ARCHIVED });
-  const parentPage = !hasExplicitOrigin && !currentUser && memo?.state !== State.ARCHIVED ? ROUTES.EXPLORE : resolvedOrigin.parentPage;
-  const parentScope = resolvedOrigin.parentScope;
+  const parentPage = !hasExplicitOrigin && !currentUser && memo?.state !== State.ARCHIVED ? ROUTES.EXPLORE : resolvedOrigin;
   const memoName = memo?.name ?? memoNameFromParams;
   const displayMemo = useReactMemo(() => {
     if (!memo) return undefined;
@@ -197,7 +192,6 @@ const MemoDetail = () => {
           memo={displayMemo}
           parentMemo={parentMemo}
           from={parentPage}
-          fromScope={parentScope}
           hasExplicitOrigin={hasExplicitOrigin}
           commentCount={isShareMode ? undefined : commentCount}
           readonly={isShareMode}
@@ -213,7 +207,7 @@ const MemoDetail = () => {
                 <Link
                   className="px-3 py-1 border border-border rounded-lg max-w-xs w-auto text-sm flex flex-row justify-start items-center flex-nowrap text-muted-foreground hover:shadow hover:opacity-80"
                   to={`/${parentMemo.name}`}
-                  state={createMemoNavigationState(parentPage, parentScope)}
+                  state={createMemoNavigationState(parentPage)}
                   viewTransition
                 >
                   <ArrowUpLeftFromCircleIcon className="w-4 h-auto shrink-0 opacity-60 mr-2" />
@@ -227,7 +221,6 @@ const MemoDetail = () => {
               memo={displayMemo}
               compact={false}
               parentPage={parentPage}
-              parentScope={parentScope}
               shareImageDialogOpen={shareImageDialogOpen}
               showCreator
               showVisibility
@@ -242,7 +235,6 @@ const MemoDetail = () => {
                 comments={comments}
                 commentCount={commentCount}
                 parentPage={parentPage}
-                parentScope={parentScope}
                 hasMoreComments={hasNextComments}
                 isFetchingMoreComments={isFetchingNextComments}
                 onLoadMoreComments={fetchNextComments}

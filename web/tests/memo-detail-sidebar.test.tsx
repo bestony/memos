@@ -83,7 +83,6 @@ describe("MemoDetailSidebar", () => {
         memo={memo}
         parentMemo={parentMemo}
         parentPage="/explore?filter=tagSearch%3Awork"
-        parentScope="preserve"
         hasExplicitOrigin
         commentCount={3}
         onEdit={onEdit}
@@ -144,9 +143,7 @@ describe("MemoDetailSidebar", () => {
       relations: [createIncomingReference("memos/public")],
     });
 
-    renderSidebar(
-      <MemoDetailSidebar memo={memo} parentPage="/explore" parentScope="all" commentCount={1} onEdit={vi.fn()} onCommentCreate={vi.fn()} />,
-    );
+    renderSidebar(<MemoDetailSidebar memo={memo} parentPage="/explore" commentCount={1} onEdit={vi.fn()} onCommentCreate={vi.fn()} />);
 
     expect(screen.queryByRole("button", { name: "common.edit" })).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: "memo.comment.write-a-comment" })).toBeInTheDocument();
@@ -163,9 +160,7 @@ describe("MemoDetailSidebar", () => {
       content: "Body",
     });
 
-    renderSidebar(
-      <MemoDetailSidebar memo={memo} parentPage="/" parentScope="all" commentCount={0} onEdit={vi.fn()} onCommentCreate={vi.fn()} />,
-    );
+    renderSidebar(<MemoDetailSidebar memo={memo} parentPage="/" commentCount={0} onEdit={vi.fn()} onCommentCreate={vi.fn()} />);
 
     expect(screen.getByRole("link", { name: "memo.go-to:common.home" })).toHaveAttribute("href", "/");
     expect(screen.queryByText("memo.on-this-memo")).not.toBeInTheDocument();
@@ -187,7 +182,7 @@ describe("MemoDetailSidebar", () => {
       content: "Body",
     });
 
-    renderSidebar(<MemoDetailSidebar memo={memo} parentPage="/" parentScope="all" commentCount={0} />);
+    renderSidebar(<MemoDetailSidebar memo={memo} parentPage="/" commentCount={0} />);
     fireEvent.click(screen.getByRole("button", { name: "common.share" }));
 
     expect(await screen.findByRole("menuitem", { name: "memo.copy-link" })).toBeInTheDocument();
@@ -202,16 +197,7 @@ describe("MemoDetailSidebar", () => {
       content: "Archived body",
     });
 
-    renderSidebar(
-      <MemoDetailSidebar
-        memo={memo}
-        parentPage="/archived"
-        parentScope="preserve"
-        commentCount={2}
-        onEdit={vi.fn()}
-        onCommentCreate={vi.fn()}
-      />,
-    );
+    renderSidebar(<MemoDetailSidebar memo={memo} parentPage="/archived" commentCount={2} onEdit={vi.fn()} onCommentCreate={vi.fn()} />);
 
     expect(screen.getByRole("link", { name: "memo.go-to:common.archived" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /memo.comment.self/ })).toHaveTextContent("2");
@@ -237,7 +223,6 @@ describe("MemoDetailSidebar", () => {
         memo={memo}
         parentMemo={parentMemo}
         parentPage="/explore"
-        parentScope="all"
         hasExplicitOrigin
         commentCount={4}
         forceReadonly

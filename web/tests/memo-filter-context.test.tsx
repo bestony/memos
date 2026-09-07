@@ -81,7 +81,7 @@ describe("MemoFilterProvider", () => {
     );
     render(<RouterProvider router={router} />);
     fireEvent.click(screen.getByRole("button", { name: "Select Tasks" }));
-    const state = { from: origin, fromScope: "preserve" };
+    const state = { from: origin };
     await act(() => router.navigate("/memos/1", { state }));
     await waitFor(() => expect(screen.getByTestId("filters")).toHaveTextContent("[]"));
     expect(router.state.location.search).toBe("");

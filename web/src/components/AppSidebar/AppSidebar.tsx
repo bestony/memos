@@ -270,7 +270,6 @@ const MemoDetailSidebarContent = () => {
       memo={memoDetail.memo}
       parentMemo={memoDetail.parentMemo}
       parentPage={memoDetail.from}
-      parentScope={memoDetail.fromScope}
       hasExplicitOrigin={memoDetail.hasExplicitOrigin}
       commentCount={memoDetail.commentCount}
       forceReadonly={memoDetail.readonly}

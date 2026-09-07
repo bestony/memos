@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { resolveQuickFindSubmission } from "@/components/AppSidebar/QuickFindDialog";
 import { getRouteActionPolicy, getSidebarRouteKind } from "@/components/AppSidebar/routes";
 import { CalendarHeader } from "@/components/CalendarView/CalendarHeader";
-import { resolveMemoDetailOrigin, resolveMemoOrigin } from "@/components/MemoView/navigation";
+import { resolveMemoDetailOrigin, resolveMemoParentPage } from "@/components/MemoView/navigation";
 import Calendar from "@/pages/Calendar";
 import { buildCollectionPath, getSpaceSwitchPath, resolveCollectionRoute } from "@/router/routes";
 import { SpaceRoute } from "@/router/SpaceRoute";
@@ -59,10 +59,10 @@ describe("Space route contract", () => {
   it("carries the full calendar origin through a permanent memo link", () => {
     const parentPage = "/spaces/a/calendar/2026/09/06?filter=tagSearch%3Awork";
     expect(
-      resolveMemoOrigin({ pathname: "/spaces/a/calendar/2026/09/06", search: "?filter=tagSearch%3Awork", memoName: "memos/x" }),
-    ).toEqual({ parentPage, parentScope: "preserve" });
-    expect(resolveMemoDetailOrigin({ from: parentPage })).toEqual({ parentPage, parentScope: "preserve" });
-    expect(resolveMemoDetailOrigin(undefined)).toEqual({ parentPage: "/", parentScope: "all" });
+      resolveMemoParentPage({ pathname: "/spaces/a/calendar/2026/09/06", search: "?filter=tagSearch%3Awork", memoName: "memos/x" }),
+    ).toBe(parentPage);
+    expect(resolveMemoDetailOrigin({ from: parentPage })).toBe(parentPage);
+    expect(resolveMemoDetailOrigin(undefined)).toBe("/");
   });
 });
 

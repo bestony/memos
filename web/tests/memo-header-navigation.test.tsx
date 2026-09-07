@@ -62,7 +62,6 @@ vi.mock("@/components/MemoView/MemoViewContext", () => ({
     creator: state.creator,
     currentUser: state.currentUser,
     parentPage: "/explore?filter=tagSearch%3Awork",
-    parentScope: "preserve",
     isArchived: false,
     readonly: false,
     openEditor: vi.fn(),
@@ -142,9 +141,7 @@ describe("MemoHeader navigation", () => {
     expect(timestamp).toHaveFocus();
 
     fireEvent.click(timestamp);
-    expect(screen.getByTestId("location")).toHaveTextContent(
-      '/memos/123|{"from":"/explore?filter=tagSearch%3Awork","fromScope":"preserve"}',
-    );
+    expect(screen.getByTestId("location")).toHaveTextContent('/memos/123|{"from":"/explore?filter=tagSearch%3Awork"}');
   });
 
   it.each([false, true])("keeps the Space pill beside the timestamp when showCreator=%s", (showCreator) => {

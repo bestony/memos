@@ -63,7 +63,7 @@ export const AttachmentSourceChip = ({
   return (
     <Link
       to={`/${memoName}`}
-      state={createMemoNavigationState(`${location.pathname}${location.search}`, "preserve")}
+      state={createMemoNavigationState(`${location.pathname}${location.search}`)}
       className="inline-flex max-w-full items-center truncate rounded-full border border-border/60 bg-muted/30 px-1.5 py-0.5 text-[11px] text-muted-foreground hover:bg-muted/50"
     >
       <span className="truncate">{t("attachment-library.labels.memo")}</span>

@@ -19,7 +19,7 @@ import SidebarSection, { SIDEBAR_SECTION_STACK_CLASSES } from "@/components/AppS
 import { extractHeadings } from "@/components/MemoContent/pipeline";
 import { getRelationBuckets, getRelationMemo } from "@/components/MemoMetadata/Relation/relationHelpers";
 import { useResolvedRelationMemos } from "@/components/MemoMetadata/Relation/useResolvedRelationMemos";
-import { createMemoNavigationState, type MemoOriginScope } from "@/components/MemoView/navigation";
+import { createMemoNavigationState } from "@/components/MemoView/navigation";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useInstance } from "@/contexts/InstanceContext";
 import { useOverflowTitle } from "@/hooks";
@@ -37,7 +37,6 @@ interface Props {
   memo: Memo;
   parentMemo?: Memo;
   parentPage?: string;
-  parentScope?: MemoOriginScope;
   hasExplicitOrigin?: boolean;
   commentCount?: number;
   className?: string;
@@ -54,13 +53,11 @@ const BacklinkRow = ({
   relation,
   snippet,
   parentPage,
-  parentScope,
   referencedByLabel,
 }: {
   relation: MemoRelation;
   snippet: string;
   parentPage?: string;
-  parentScope?: MemoOriginScope;
   referencedByLabel: string;
 }) => {
   const { ref, title } = useOverflowTitle<HTMLSpanElement>(snippet);
@@ -74,7 +71,7 @@ const BacklinkRow = ({
       aria-label={`${referencedByLabel}: ${snippet}`}
       className={cn(SIDEBAR_ROW_CLASSES, "text-muted-foreground hover:bg-sidebar-accent/65 hover:text-foreground")}
       to={`/${relatedMemo.name}`}
-      state={parentPage && parentScope ? createMemoNavigationState(parentPage, parentScope) : undefined}
+      state={parentPage ? createMemoNavigationState(parentPage) : undefined}
       title={title}
       viewTransition
     >
@@ -90,7 +87,6 @@ const MemoDetailSidebar = ({
   memo,
   parentMemo,
   parentPage,
-  parentScope,
   hasExplicitOrigin = false,
   commentCount,
   className,
@@ -219,7 +215,7 @@ const MemoDetailSidebar = ({
               aria-label={`${t("memo.parent-memo")}: ${parentSnippet}`}
               className={cn(SIDEBAR_ROW_CLASSES, "text-muted-foreground hover:bg-sidebar-accent/65 hover:text-foreground")}
               to={`/${parentMemo.name}`}
-              state={parentPage && parentScope ? createMemoNavigationState(parentPage, parentScope) : undefined}
+              state={parentPage ? createMemoNavigationState(parentPage) : undefined}
               title={parentSnippet}
               viewTransition
             >
@@ -235,7 +231,6 @@ const MemoDetailSidebar = ({
                 relation={relation}
                 snippet={backlinkSnippet(relation)}
                 parentPage={parentPage}
-                parentScope={parentScope}
                 referencedByLabel={t("common.referenced-by")}
               />
             );

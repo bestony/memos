@@ -11,7 +11,8 @@ import {
   RequireGuestRoute,
   RequireInstanceInitializationRoute,
 } from "./guards";
-import { CALENDAR_ROUTE_PATTERN, ROUTES } from "./routes";
+import { CALENDAR_ROUTE_PATTERN, ROUTES, SPACE_ROUTE_PATTERN } from "./routes";
+import { SpaceRoute } from "./SpaceRoute";
 
 const AdminSignIn = lazyWithReload(() => import("@/pages/AdminSignIn"));
 const About = lazyWithReload(() => import("@/pages/About"));
@@ -107,6 +108,26 @@ export const routeConfig: RouteObject[] = [
               {
                 element: <RequireFullInitializationRoute />,
                 children: [
+                  {
+                    path: SPACE_ROUTE_PATTERN,
+                    children: [
+                      {
+                        element: <SpaceRoute />,
+                        children: [
+                          {
+                            element: <MainLayout />,
+                            children: [
+                              { index: true, element: <Home /> },
+                              { path: "explore", element: <Explore /> },
+                              { path: "calendar/:year?/:month?/:day?", element: <Calendar /> },
+                            ],
+                          },
+                          { path: "attachments", element: <Attachments /> },
+                        ],
+                      },
+                      { path: "*", element: <NotFound /> },
+                    ],
+                  },
                   { path: Routes.ATTACHMENTS, element: <Attachments /> },
                   { path: Routes.INBOX, element: <Inboxes /> },
                   { path: Routes.SETTING, element: <Setting /> },

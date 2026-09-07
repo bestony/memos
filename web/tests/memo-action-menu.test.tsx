@@ -32,7 +32,7 @@ vi.mock("@/utils/i18n", () => ({
 describe("MemoActionMenu", () => {
   it("is a quiet compact control that takes the accent fill while open", async () => {
     const memo = create(MemoSchema, { name: "memos/1", state: State.NORMAL, pinned: false });
-    render(<MemoActionMenu memo={memo} parentScope="preserve" />);
+    render(<MemoActionMenu memo={memo} />);
 
     const trigger = screen.getByRole("button", { name: "common.more" });
     expect(trigger).toHaveClass("size-6", "rounded-md", "text-muted-foreground/70", "hover:bg-muted/60", "data-popup-open:bg-accent");

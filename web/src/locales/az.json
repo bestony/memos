@@ -54,7 +54,6 @@
     "new-memo-on-day": "Bu gün üçün yeni qeyd",
     "next-year": "Növbəti il",
     "no-memos-in-month": "{{month}} ayında qeyd yoxdur",
-    "no-memos-on-day": "Bu gün üçün qeyd yoxdur",
     "previous-year": "Əvvəlki il",
     "resize-panel": "Gün panelinin ölçüsünü dəyiş",
     "select-month": "Ay seç"
@@ -1071,6 +1070,8 @@
     }
   },
   "space": {
+    "unavailable": "Bu sahə mövcud deyil və ya ona giriş icazəniz yoxdur.",
+    "back-to-memos": "Memos-a qayıt",
     "create": "Sahə yarat",
     "create-description": "Qeydlər və üzvlər üçün ortaq yer yaradın.",
     "create-success": "Sahə yaradıldı",

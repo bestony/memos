@@ -130,7 +130,7 @@ const MemoHeader: React.FC<MemoHeaderProps> = ({ timeDisplay = "relative", showC
           </TooltipProvider>
         )}
 
-        <MemoActionMenu memo={memo} parentScope={parentScope} readonly={readonly} onEdit={openEditor} />
+        <MemoActionMenu memo={memo} parentPage={parentPage} readonly={readonly} onEdit={openEditor} />
       </div>
     </div>
   );

@@ -16,7 +16,6 @@ import {
 
 const copyToClipboard = vi.hoisted(() => vi.fn());
 const currentUserState = vi.hoisted(() => ({ value: { name: "users/alice" } as { name: string } | undefined }));
-const clearSelectedSpace = vi.hoisted(() => vi.fn());
 
 vi.mock("copy-to-clipboard", () => ({ default: copyToClipboard }));
 vi.mock("react-hot-toast", () => ({ default: { success: vi.fn() } }));
@@ -26,7 +25,6 @@ vi.mock("@/components/MemoDetailSidebar/MemoOutline", () => ({
 vi.mock("@/components/MemoDetailSidebar/MemoSharePanel", () => ({ default: () => <div data-testid="share-panel" /> }));
 vi.mock("@/components/MemoMetadata/Relation/useResolvedRelationMemos", () => ({ useResolvedRelationMemos: () => ({}) }));
 vi.mock("@/contexts/InstanceContext", () => ({ useInstance: () => ({ profile: { instanceUrl: "https://memos.example/" } }) }));
-vi.mock("@/contexts/SpaceContext", () => ({ useSpaceContext: () => ({ clearSelectedSpace }) }));
 vi.mock("@/hooks/useCurrentUser", () => ({ default: () => currentUserState.value }));
 vi.mock("@/utils/i18n", () => ({
   useTranslate: () => (key: string, values?: { source?: string }) => (values?.source ? `${key}:${values.source}` : key),
@@ -45,7 +43,6 @@ const createIncomingReference = (memoName: string, sourceName = "memos/incoming"
 describe("MemoDetailSidebar", () => {
   beforeEach(() => {
     copyToClipboard.mockReset();
-    clearSelectedSpace.mockReset();
     currentUserState.value = { name: "users/alice" };
   });
 
@@ -155,8 +152,7 @@ describe("MemoDetailSidebar", () => {
     expect(screen.getByRole("button", { name: "memo.comment.write-a-comment" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "common.referenced-by: Incoming backlink" })).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("link", { name: "memo.go-to:common.explore" }));
-    expect(clearSelectedSpace).toHaveBeenCalledOnce();
+    expect(screen.getByRole("link", { name: "memo.go-to:common.explore" })).toHaveAttribute("href", "/explore");
   });
 
   it("keeps a simple memo useful without rendering empty navigation or connections", () => {

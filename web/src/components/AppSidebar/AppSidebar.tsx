@@ -46,13 +46,13 @@ import { useNotifications, useUser } from "@/hooks/useUserQueries";
 import { getMemoScopePath, getProfileUsername, type PrimaryMemoScope, resolveMemoScope } from "@/lib/memo-views";
 import { userNamePrefix } from "@/lib/resource-names";
 import { cn } from "@/lib/utils";
-import { ROUTES } from "@/router/routes";
+import { collectionPathForLocation, ROUTES } from "@/router/routes";
 import { State } from "@/types/proto/api/v1/common_pb";
 import { User_Role, UserNotification_Status } from "@/types/proto/api/v1/user_service_pb";
 import { useTranslate } from "@/utils/i18n";
 import MemosLogo from "../MemosLogo";
 import CommonSidebarContent from "./CommonSidebarContent";
-import { getSidebarRouteKind, routeSupportsCollectionScope } from "./routes";
+import { getSidebarRouteKind } from "./routes";
 import SidebarRow, { SIDEBAR_ROW_CLASSES, SIDEBAR_ROW_FOCUS_CLASSES, SidebarRowIconSlot, sidebarRowStateClasses } from "./SidebarRow";
 import SidebarSection, { SIDEBAR_SECTION_STACK_CLASSES } from "./SidebarSection";
 import SpaceSwitcher from "./SpaceSwitcher";
@@ -368,7 +368,7 @@ const GlobalNavigation = () => {
 
   const navigateToScope = (scope: PrimaryMemoScope) => {
     setMemoScope(scope);
-    navigate({ pathname: getMemoScopePath(scope), search: getFilterSearch(filters) });
+    navigate({ pathname: collectionPathForLocation(getMemoScopePath(scope), location.pathname), search: getFilterSearch(filters) });
     setMobileOpen(false);
   };
 
@@ -377,14 +377,14 @@ const GlobalNavigation = () => {
         {
           id: "calendar",
           label: t("common.calendar"),
-          path: ROUTES.CALENDAR,
+          path: collectionPathForLocation(ROUTES.CALENDAR, location.pathname),
           icon: CalendarDaysIcon,
           active: routeKind === "calendar",
         },
         {
           id: "attachments",
           label: t("common.attachments"),
-          path: ROUTES.ATTACHMENTS,
+          path: collectionPathForLocation(ROUTES.ATTACHMENTS, location.pathname),
           icon: PaperclipIcon,
           active: routeKind === "attachments",
         },
@@ -541,12 +541,11 @@ const GlobalNavigation = () => {
   );
 };
 
-/** The sidebar/header brand slot: collection scope on collection routes, instance brand elsewhere. */
+/** Signed-in users can navigate between Spaces from any page; global pages show Memos. */
 const SidebarBrand = ({ className, size = "md" }: { className?: string; size?: "md" | "header" }) => {
   const currentUser = useCurrentUser();
-  const location = useLocation();
 
-  if (currentUser && routeSupportsCollectionScope(location.pathname)) {
+  if (currentUser) {
     return <SpaceSwitcher className={className} size={size} />;
   }
 

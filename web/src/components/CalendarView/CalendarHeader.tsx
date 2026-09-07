@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { buttonVariants } from "@/components/ui/button";
 import { addMonths } from "@/lib/calendar-utils";
 import { cn } from "@/lib/utils";
+import { collectionPathForLocation } from "@/router/routes";
 import { useTranslate } from "@/utils/i18n";
 import { CalendarLink } from "./CalendarLink";
 import { MonthPicker } from "./MonthPicker";
@@ -33,7 +34,7 @@ export const getTodayPath = (month: string, activeDate: string | undefined, toda
 export const CalendarHeader = ({ month, monthLabel, today, activeDate, closable }: CalendarHeaderProps) => {
   const t = useTranslate();
   const navigate = useNavigate();
-  const { search } = useLocation();
+  const { pathname, search } = useLocation();
   const todayOpen = activeDate === today;
   const iconControlClassName = cn(buttonVariants({ variant: "quiet", size: "icon-compact" }));
 
@@ -55,7 +56,9 @@ export const CalendarHeader = ({ month, monthLabel, today, activeDate, closable 
           type="button"
           aria-pressed={todayOpen}
           className={cn(buttonVariants({ variant: "quiet", size: "sm" }), "ms-1.5")}
-          onClick={() => navigate({ pathname: getTodayPath(month, activeDate, today, closable), search })}
+          onClick={() =>
+            navigate({ pathname: collectionPathForLocation(getTodayPath(month, activeDate, today, closable), pathname), search })
+          }
         >
           {t("common.today")}
         </button>

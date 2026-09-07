@@ -19,10 +19,9 @@ import SidebarSection, { SIDEBAR_SECTION_STACK_CLASSES } from "@/components/AppS
 import { extractHeadings } from "@/components/MemoContent/pipeline";
 import { getRelationBuckets, getRelationMemo } from "@/components/MemoMetadata/Relation/relationHelpers";
 import { useResolvedRelationMemos } from "@/components/MemoMetadata/Relation/useResolvedRelationMemos";
-import { createMemoNavigationState, isMemoCollectionOrigin, type MemoOriginScope } from "@/components/MemoView/navigation";
+import { createMemoNavigationState, type MemoOriginScope } from "@/components/MemoView/navigation";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useInstance } from "@/contexts/InstanceContext";
-import { useSpaceContext } from "@/contexts/SpaceContext";
 import { useOverflowTitle } from "@/hooks";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { MEMO_COMMENTS_ANCHOR_ID } from "@/lib/memo-comments";
@@ -105,7 +104,6 @@ const MemoDetailSidebar = ({
   const location = useLocation();
   const currentUser = useCurrentUser();
   const { profile } = useInstance();
-  const { clearSelectedSpace } = useSpaceContext();
   const [sharePanelOpen, setSharePanelOpen] = useState(false);
 
   const readonly = forceReadonly || (memo.creator !== currentUser?.name && !isSuperUser(currentUser));
@@ -183,11 +181,6 @@ const MemoDetailSidebar = ({
           <Link
             className={cn(SIDEBAR_ROW_CLASSES, "text-muted-foreground hover:bg-sidebar-accent/65 hover:text-foreground")}
             to={parentPage}
-            onClick={() => {
-              if (parentScope === "all" && isMemoCollectionOrigin(parentPage)) {
-                clearSelectedSpace();
-              }
-            }}
             viewTransition
           >
             <SidebarRowIconSlot icon={ArrowLeftIcon} />

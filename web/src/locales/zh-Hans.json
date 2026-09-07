@@ -966,5 +966,9 @@
       "description": "这些文件从未附加到任何备忘。可在此查看或删除。",
       "title": "未关联的上传"
     }
+  },
+  "space": {
+    "unavailable": "空间不存在或你没有访问权限。",
+    "back-to-memos": "返回 Memos"
   }
 }

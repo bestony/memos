@@ -56,7 +56,7 @@ const MemoActionMenu = (props: MemoActionMenuProps) => {
     confirmDeleteMemo,
   } = useMemoActionHandlers({
     memo,
-    parentScope: props.parentScope,
+    parentPage: props.parentPage,
     onEdit: props.onEdit,
     setDeleteDialogOpen,
   });

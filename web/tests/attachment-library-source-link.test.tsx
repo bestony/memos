@@ -52,7 +52,7 @@ describe("<AttachmentMediaGrid>", () => {
     const onPreview = vi.fn();
 
     render(
-      <MemoryRouter initialEntries={["/attachments"]}>
+      <MemoryRouter initialEntries={["/spaces/product/attachments?filter=tagSearch%3Awork"]}>
         <AttachmentMediaGrid groups={groups} onPreview={onPreview} />
         <LocationStateProbe />
       </MemoryRouter>,
@@ -67,7 +67,9 @@ describe("<AttachmentMediaGrid>", () => {
 
     fireEvent.click(memoLink);
     expect(onPreview).not.toHaveBeenCalled();
-    expect(screen.getByTestId("location-state")).toHaveTextContent('{"from":"/","fromScope":"preserve"}');
+    expect(screen.getByTestId("location-state")).toHaveTextContent(
+      '{"from":"/spaces/product/attachments?filter=tagSearch%3Awork","fromScope":"preserve"}',
+    );
   });
 
   it("keeps video duration inside the existing play badge", () => {

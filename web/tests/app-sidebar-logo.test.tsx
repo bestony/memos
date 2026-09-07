@@ -5,6 +5,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import AppSidebar, { MobileAppHeader, MobileAppSidebar } from "@/components/AppSidebar";
 import { SIDEBAR_SECTION_ACTION_ICON_CLASSES } from "@/components/AppSidebar/SidebarSection";
 import { type MemoFilter, parseFilterQuery } from "@/contexts/MemoFilterContext";
+import { resolveCollectionRoute } from "@/router/routes";
 
 const authState = vi.hoisted(() => ({
   currentUser: { name: "users/test" } as { name: string } | undefined,
@@ -24,10 +25,6 @@ const globalEditorState = vi.hoisted(() => ({
 const spaceState = vi.hoisted(() => ({
   spaces: [] as Array<{ name: string; title: string; description: string }>,
   selectedSpace: undefined as { name: string; title: string; description: string } | undefined,
-  selectedSpaceName: undefined as string | undefined,
-  memoFilter: undefined as string | undefined,
-  clearSelectedSpace: vi.fn(),
-  selectMemos: vi.fn(),
   selectSpace: vi.fn(),
 }));
 const filteredStatsHook = vi.hoisted(() => vi.fn());
@@ -105,6 +102,7 @@ vi.mock("@/contexts/MemoFilterContext", async (importOriginal) => ({
 
 vi.mock("@/contexts/SpaceContext", () => ({
   useSpaceContext: () => {
+    const { spaceName } = resolveCollectionRoute(useLocation().pathname);
     const duplicateSpaceTitles = new Set(
       spaceState.spaces
         .filter((space, index) => spaceState.spaces.findIndex((candidate) => candidate.title === space.title) !== index)
@@ -112,6 +110,9 @@ vi.mock("@/contexts/SpaceContext", () => ({
     );
     return {
       ...spaceState,
+      selectedSpaceName: spaceName,
+      selectedSpace: spaceName ? spaceState.selectedSpace : undefined,
+      memoFilter: spaceName ? `space == ${JSON.stringify(spaceName)}` : undefined,
       duplicateSpaceTitles,
       isLoadingSpaces: false,
       isSpacesError: false,
@@ -200,10 +201,6 @@ describe("App sidebar logo", () => {
     globalEditorState.openEditor.mockClear();
     spaceState.spaces = [];
     spaceState.selectedSpace = undefined;
-    spaceState.selectedSpaceName = undefined;
-    spaceState.memoFilter = undefined;
-    spaceState.clearSelectedSpace.mockClear();
-    spaceState.selectMemos.mockClear();
     spaceState.selectSpace.mockClear();
     filteredStatsHook.mockClear();
     filterState.filters = [];
@@ -271,17 +268,15 @@ describe("App sidebar logo", () => {
   });
 
   it.each([
-    "/",
-    "/explore",
-    "/attachments",
-    "/Explore/",
-    "/Attachments/",
+    "/spaces/product",
+    "/spaces/product/explore",
+    "/spaces/product/attachments",
+    "/spaces/product/Explore/",
+    "/spaces/product/Attachments/",
   ])("shows the selected Space only on collection route %s", (path) => {
     const product = { name: "spaces/product", title: "Product", description: "" };
     spaceState.spaces = [product];
     spaceState.selectedSpace = product;
-    spaceState.selectedSpaceName = product.name;
-    spaceState.memoFilter = 'space == "spaces/product"';
 
     render(
       <MemoryRouter initialEntries={[path]}>
@@ -302,12 +297,10 @@ describe("App sidebar logo", () => {
     "/memos/123",
     "/memos/shares/token",
     "/404",
-  ])("uses the instance brand instead of the remembered Space on %s", (path) => {
+  ])("shows Memos in the switcher on global page %s", (path) => {
     const product = { name: "spaces/product", title: "Product", description: "" };
     spaceState.spaces = [product];
     spaceState.selectedSpace = product;
-    spaceState.selectedSpaceName = product.name;
-    spaceState.memoFilter = 'space == "spaces/product"';
 
     render(
       <MemoryRouter initialEntries={[path]}>
@@ -315,19 +308,14 @@ describe("App sidebar logo", () => {
       </MemoryRouter>,
     );
 
-    const brand = screen.getByRole("link", { name: "Memos logo" });
-    expect(brand).toHaveAttribute("href", "/");
+    const brand = screen.getByRole("button", { name: "space.switch: common.memos" });
     expect(brand).toHaveClass("h-9", "gap-2", "px-2");
     expect(within(brand).getByText("Memos logo")).toHaveAttribute("data-logo-size", "header");
-    expect(screen.queryByRole("button", { name: /^space\.switch:/ })).not.toBeInTheDocument();
   });
 
   it("scopes collection statistics to the selected Space", () => {
-    spaceState.selectedSpaceName = "spaces/product";
-    spaceState.memoFilter = 'space == "spaces/product"';
-
     render(
-      <MemoryRouter initialEntries={["/explore"]}>
+      <MemoryRouter initialEntries={["/spaces/product/explore"]}>
         <AppSidebar />
       </MemoryRouter>,
     );
@@ -345,10 +333,7 @@ describe("App sidebar logo", () => {
     expect(filteredStatsHook).toHaveBeenCalledWith(expect.objectContaining({ context: "explore", filter: undefined }));
   });
 
-  it("keeps Profile statistics and tag UI state independent of the remembered Space", () => {
-    spaceState.selectedSpaceName = "spaces/product";
-    spaceState.memoFilter = 'space == "spaces/product"';
-
+  it("keeps Profile statistics and tag UI state unscoped by Space", () => {
     render(
       <MemoryRouter initialEntries={["/u/alice"]}>
         <AppSidebar />
@@ -359,10 +344,7 @@ describe("App sidebar logo", () => {
     expect(tagsSectionHook).toHaveBeenCalledWith(expect.objectContaining({ scope: "profile" }));
   });
 
-  it("keeps Archived statistics and tag UI state independent of the remembered Space", () => {
-    spaceState.selectedSpaceName = "spaces/product";
-    spaceState.memoFilter = 'space == "spaces/product"';
-
+  it("keeps Archived statistics and tag UI state unscoped by Space", () => {
     render(
       <MemoryRouter initialEntries={["/archived"]}>
         <AppSidebar />
@@ -400,11 +382,8 @@ describe("App sidebar logo", () => {
   });
 
   it("hides the instance-level unused attachment collection in a Space", () => {
-    spaceState.selectedSpaceName = "spaces/product";
-    spaceState.memoFilter = 'space == "spaces/product"';
-
     render(
-      <MemoryRouter initialEntries={["/attachments"]}>
+      <MemoryRouter initialEntries={["/spaces/product/attachments"]}>
         <AppSidebar />
       </MemoryRouter>,
     );
@@ -475,7 +454,7 @@ describe("App sidebar logo", () => {
     expect(screen.queryByRole("region", { name: "common.statistics" })).not.toBeInTheDocument();
     expect(screen.queryByText("common.views")).not.toBeInTheDocument();
     expect(screen.queryByText("Tags")).not.toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Memos logo" })).toHaveAttribute("href", "/");
+    expect(screen.getByRole("button", { name: "space.switch: common.memos" })).toBeInTheDocument();
     const navigation = within(screen.getByRole("navigation", { name: "Primary" }));
     expectDefaultNavPill(navigation.getByRole("button", { name: "common.home" }), "common.home");
     const attachments = navigation.getByRole("link", { name: "common.attachments" });
@@ -670,10 +649,8 @@ describe("App sidebar logo", () => {
     );
 
     expect(screen.getByRole("button", { name: "Open navigation" })).toHaveAttribute("data-mobile-navigation-trigger");
-    const mobileBrand = screen.getByRole("link", { name: "Memos logo" });
-    expect(mobileBrand).toHaveAttribute("href", "/");
+    const mobileBrand = screen.getByRole("button", { name: "space.switch: common.memos" });
     expect(mobileBrand).toHaveClass("h-9", "gap-1.5", "px-1");
-    expect(screen.queryByRole("button", { name: /^space\.switch:/ })).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "common.search" })).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "editor.new-memo" })).not.toBeInTheDocument();
   });

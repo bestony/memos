@@ -15,7 +15,7 @@ import { useMemoViews, userKeys } from "@/hooks/useUserQueries";
 import { handleError } from "@/lib/error";
 import { BUILTIN_TASKS_VIEW_ID, getMemoViewId, isMemoCollectionRoute } from "@/lib/memo-views";
 import { cn } from "@/lib/utils";
-import { ROUTES } from "@/router/routes";
+import { collectionPathForLocation, ROUTES } from "@/router/routes";
 import type { MemoView } from "@/types/proto/api/v1/memo_view_service_pb";
 import { useTranslate } from "@/utils/i18n";
 import SidebarRow, {
@@ -47,7 +47,8 @@ const ViewsSection = ({ manageActive = false }: { manageActive?: boolean }) => {
 
   const handleView = (viewId: string) => {
     setMemoView(selectedMemoView === viewId ? undefined : viewId);
-    if (!isMemoCollectionRoute(location.pathname)) navigate(ROUTES.HOME);
+    if (!isMemoCollectionRoute(location.pathname))
+      navigate({ pathname: collectionPathForLocation(ROUTES.HOME, location.pathname), search: location.search });
     setMobileOpen(false);
   };
 

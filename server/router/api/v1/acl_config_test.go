@@ -83,12 +83,12 @@ func TestProtectedMethodsRequireAuth(t *testing.T) {
 		// Attachment Service - write operations
 		"/memos.api.v1.AttachmentService/CreateAttachment",
 		"/memos.api.v1.AttachmentService/DeleteAttachment",
-		// Memo View Service
-		"/memos.api.v1.MemoViewService/CreateMemoView",
-		"/memos.api.v1.MemoViewService/GetMemoView",
-		"/memos.api.v1.MemoViewService/ListMemoViews",
-		"/memos.api.v1.MemoViewService/UpdateMemoView",
-		"/memos.api.v1.MemoViewService/DeleteMemoView",
+		// User Service - saved memo views
+		"/memos.api.v1.UserService/CreateMemoView",
+		"/memos.api.v1.UserService/GetMemoView",
+		"/memos.api.v1.UserService/ListMemoViews",
+		"/memos.api.v1.UserService/UpdateMemoView",
+		"/memos.api.v1.UserService/DeleteMemoView",
 	}
 
 	for _, method := range protectedMethods {

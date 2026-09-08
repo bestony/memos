@@ -14,7 +14,6 @@ vi.mock("@/connect", () => ({
   attachmentServiceClient: { uploadAttachment: mocks.uploadAttachment },
   authServiceClient: {},
   userServiceClient: {},
-  memoViewServiceClient: {},
   refreshAccessToken: vi.fn(),
 }));
 

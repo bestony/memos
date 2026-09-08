@@ -9,7 +9,7 @@ import { useInfiniteMemos } from "@/hooks/useMemoQueries";
 import { shouldRetry } from "@/lib/query-client";
 
 const listMemos = vi.hoisted(() => vi.fn());
-vi.mock("@/connect", () => ({ memoServiceClient: { listMemos }, userServiceClient: {}, memoViewServiceClient: {} }));
+vi.mock("@/connect", () => ({ memoServiceClient: { listMemos }, userServiceClient: {} }));
 
 const createWrapper = () => {
   const client = new QueryClient({ defaultOptions: { queries: { retry: shouldRetry, retryDelay: 0 } } });

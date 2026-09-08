@@ -30,7 +30,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { memoViewServiceClient } from "@/connect";
+import { userServiceClient } from "@/connect";
 import { useMemoFilterContext } from "@/contexts/MemoFilterContext";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useLoading from "@/hooks/useLoading";
@@ -38,7 +38,7 @@ import { useMemoViews, userKeys } from "@/hooks/useUserQueries";
 import { handleError } from "@/lib/error";
 import { getMemoViewId } from "@/lib/memo-views";
 import { cn } from "@/lib/utils";
-import { MemoView, MemoViewSchema } from "@/types/proto/api/v1/memo_view_service_pb";
+import { MemoView, MemoViewSchema } from "@/types/proto/api/v1/user_service_pb";
 import { useTranslate } from "@/utils/i18n";
 
 const memoViewExamples = [
@@ -346,7 +346,7 @@ const MemoViews = () => {
 
     try {
       validateState.setLoading();
-      await memoViewServiceClient.createMemoView({
+      await userServiceClient.createMemoView({
         parent: user.name,
         memoView: { name: "", title: draft.title, filter: draft.filter },
         validateOnly: true,
@@ -375,7 +375,7 @@ const MemoViews = () => {
 
     try {
       createState.setLoading();
-      await memoViewServiceClient.createMemoView({
+      await userServiceClient.createMemoView({
         parent: user.name,
         memoView: { name: "", title: draft.title, filter: draft.filter },
       });
@@ -400,7 +400,7 @@ const MemoViews = () => {
 
     try {
       updateState.setLoading();
-      await memoViewServiceClient.updateMemoView({
+      await userServiceClient.updateMemoView({
         memoView: draft,
         updateMask: create(FieldMaskSchema, { paths: ["title", "filter"] }),
       });
@@ -430,7 +430,7 @@ const MemoViews = () => {
     if (!deleteTarget) return;
 
     try {
-      await memoViewServiceClient.deleteMemoView({ name: deleteTarget.name });
+      await userServiceClient.deleteMemoView({ name: deleteTarget.name });
       await queryClient.invalidateQueries({ queryKey: userKeys.memoViews(user?.name) });
       if (selectedMemoView === getMemoViewId(deleteTarget.name)) setMemoView(undefined);
       toast.success(t("setting.memo-view.delete-success", { title: deleteTarget.title }));

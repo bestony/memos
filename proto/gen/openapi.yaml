@@ -2518,12 +2518,12 @@ paths:
     /api/v1/users/{user}/views:
         get:
             tags:
-                - MemoViewService
+                - UserService
             description: |-
                 ListMemoViews returns a user's memo views. Each view is a named, reusable
                  CEL filter (see MemoView.filter); pass its filter string directly to the
                  ListMemos `filter` argument.
-            operationId: MemoViewService_ListMemoViews
+            operationId: UserService_ListMemoViews
             parameters:
                 - name: user
                   in: path
@@ -2546,9 +2546,9 @@ paths:
                                 $ref: '#/components/schemas/Status'
         post:
             tags:
-                - MemoViewService
+                - UserService
             description: CreateMemoView creates a new memo view for a user.
-            operationId: MemoViewService_CreateMemoView
+            operationId: UserService_CreateMemoView
             parameters:
                 - name: user
                   in: path
@@ -2583,9 +2583,9 @@ paths:
     /api/v1/users/{user}/views/{view}:
         get:
             tags:
-                - MemoViewService
+                - UserService
             description: GetMemoView gets a memo view by name.
-            operationId: MemoViewService_GetMemoView
+            operationId: UserService_GetMemoView
             parameters:
                 - name: user
                   in: path
@@ -2614,9 +2614,9 @@ paths:
                                 $ref: '#/components/schemas/Status'
         delete:
             tags:
-                - MemoViewService
+                - UserService
             description: DeleteMemoView deletes a memo view for a user.
-            operationId: MemoViewService_DeleteMemoView
+            operationId: UserService_DeleteMemoView
             parameters:
                 - name: user
                   in: path
@@ -2642,9 +2642,9 @@ paths:
                                 $ref: '#/components/schemas/Status'
         patch:
             tags:
-                - MemoViewService
+                - UserService
             description: UpdateMemoView updates a memo view for a user.
-            operationId: MemoViewService_UpdateMemoView
+            operationId: UserService_UpdateMemoView
             parameters:
                 - name: user
                   in: path
@@ -4119,6 +4119,7 @@ components:
                     description: |-
                         The CEL filter expression for the memo view, using the same grammar as the
                          ListMemos `filter` argument. Reuse it by passing this value to ListMemos.
+            description: Saved memo view messages
         Memo_Property:
             type: object
             properties:
@@ -5040,7 +5041,6 @@ tags:
     - name: IdentityProviderService
     - name: InstanceService
     - name: MemoService
-    - name: MemoViewService
     - name: SpaceService
       description: SpaceService manages collaborative spaces and their memberships.
     - name: UserService

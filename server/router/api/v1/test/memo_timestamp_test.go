@@ -49,14 +49,14 @@ func TestUpdateMemoTimestamps(t *testing.T) {
 			}})
 			require.NoError(t, err)
 			tc.patch.Name = memo.Name
-			before := time.Now().Unix()
+			beforeSec := time.Now().Unix()
 			updated, err := ts.Service.UpdateMemo(userCtx, &apiv1.UpdateMemoRequest{
 				Memo: tc.patch, UpdateMask: &fieldmaskpb.FieldMask{Paths: tc.paths},
 			})
 			require.NoError(t, err)
 			require.Equal(t, tc.wantCreate, updated.CreateTime.Seconds)
 			if tc.autoUpdate {
-				require.GreaterOrEqual(t, updated.UpdateTime.Seconds, before)
+				require.GreaterOrEqual(t, updated.UpdateTime.Seconds, beforeSec)
 				require.LessOrEqual(t, updated.UpdateTime.Seconds, time.Now().Unix())
 			} else {
 				require.Equal(t, tc.wantUpdate, updated.UpdateTime.Seconds)
